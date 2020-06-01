@@ -1,0 +1,32 @@
+include:
+  - "https://gitlab.com/accessable-net/gitlab-ci-templates/-/raw/master/android.yml"
+  - "https://gitlab.com/accessable-net/gitlab-ci-templates/-/raw/master/scheduled_rebase.yml"
+
+.checkout-deagle: &checkout_deagle
+    - git clone https://github.com/oasisfeng/deagle ../deagle -b dev
+
+AssembleDebug:
+  extends:
+    - .android-base
+  stage: build
+  before_script:
+    - *checkout_deagle
+    - sudo chmod +x ./gradlew
+  script:
+    - ./gradlew assembleCompleteDebug
+  artifacts:
+    paths:
+      - ./assembly/build/outputs/
+
+AssembleRelease:
+  extends:
+    - .android-base
+  before_script:
+    - *checkout_deagle
+    - sudo chmod +x ./gradlew
+  script:
+    - base64 -d $KEYSTORE_FILE > my.keystore
+    - ./gradlew assembleCompleteRelease -Pandroid.injected.signing.store.file=$(pwd)/my.keystore -Pandroid.injected.signing.store.password=$KEYSTORE_PASSWORD -Pandroid.injected.signing.key.alias=$KEY_ALIAS -Pandroid.injected.signing.key.password=$KEY_PASSWORD
+  artifacts:
+    paths:
+      - ./assembly/build/outputs/
