@@ -1,0 +1,3 @@
+tasks:
+  - init: ./gradlew build
+image: circleci/android:api-29
