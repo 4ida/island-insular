@@ -70,6 +70,7 @@ dependencies {
     completeImplementation project(':installer')
     completeImplementation project(':watcher')
     completeImplementation project(':open')
+    completeImplementation project(':deagle')
     // Engine only
     engineImplementation project(':engine')
     // Mobile only
