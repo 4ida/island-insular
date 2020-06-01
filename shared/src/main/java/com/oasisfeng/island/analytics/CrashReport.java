@@ -8,7 +8,6 @@ import com.oasisfeng.android.util.Suppliers;
 import com.oasisfeng.island.firebase.FirebaseWrapper;
 import com.oasisfeng.island.shared.BuildConfig;
 
-import io.fabric.sdk.android.Fabric;
 
 /**
  * Lazy initializer for crash handler.
@@ -26,8 +25,6 @@ public abstract class CrashReport {
 	static void setProperty(final String key, final boolean value) { sSingleton.get().setBool(key, value); }
 
 	private static final Supplier<CrashlyticsCore> sSingleton = Suppliers.memoize(() -> {
-		Fabric.with(new Fabric.Builder(FirebaseWrapper.init()).debuggable(BuildConfig.DEBUG)
-				.kits(new CrashlyticsCore.Builder().disabled(DISABLED).build()).build());
 		final CrashlyticsCore instance = CrashlyticsCore.getInstance();
 		instance.setInt("user", Process.myUserHandle().hashCode());			// Attach the current (Android) user ID to crash report.
 		return instance;
