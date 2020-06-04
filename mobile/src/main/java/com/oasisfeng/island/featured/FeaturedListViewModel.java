@@ -162,7 +162,7 @@ public class FeaturedListViewModel extends AndroidViewModel {
 	}
 
 	private static void showInMarket(final Context context, final String pkg) {
-		Analytics.$().event("featured_install").with(Analytics.Param.ITEM_ID, pkg).send();
+		
 		Apps.of(context).showInMarket(pkg, "island", "featured");
 	}
 

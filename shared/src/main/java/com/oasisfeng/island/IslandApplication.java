@@ -2,7 +2,6 @@ package com.oasisfeng.island;
 
 import android.app.Application;
 
-import com.oasisfeng.island.analytics.CrashReport;
 import com.oasisfeng.island.firebase.FirebaseServiceProxy;
 import com.oasisfeng.island.shared.R;
 
@@ -20,7 +19,6 @@ public class IslandApplication extends Application {
 	public IslandApplication() {
 		if (sInstance != null) throw new IllegalStateException("Already initialized");
 		sInstance = this;
-		CrashReport.initCrashHandler();
 	}
 
 	@Override public void onCreate() {

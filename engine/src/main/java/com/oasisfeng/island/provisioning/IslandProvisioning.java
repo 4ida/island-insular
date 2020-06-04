@@ -131,7 +131,6 @@ public class IslandProvisioning extends IntentService {
 			return;
 		}
 		if (Users.isOwner() && DevicePolicyManager.ACTION_DEVICE_OWNER_CHANGED.equals(intent.getAction())) {	// ACTION_DEVICE_OWNER_CHANGED is added in Android 6.
-			Analytics.$().event("device_provision_manual_start").send();
 			startDeviceOwnerPostProvisioning(context, new DevicePolicies(context));
 			return;
 		}
@@ -145,15 +144,15 @@ public class IslandProvisioning extends IntentService {
 		final DevicePolicies policies = new DevicePolicies(context);
 		if (is_manual_setup) {		// Do the similar job of ManagedProvisioning here.
 			Log.d(TAG, "Manual provisioning");
-			Analytics.$().event("profile_post_provision_manual_start").send();
+			
 			ProfileOwnerManualProvisioning.start(context, policies);	// Mimic the stock managed profile provision
-		} else Analytics.$().event("profile_post_provision_start").send();
+		} else 
 
 		Log.d(TAG, "Start post-provisioning.");
 		try {
 			startProfileOwnerPostProvisioning(context, policies);
 		} catch (final Exception e) {
-			Analytics.$().event("profile_post_provision_error").with(Analytics.Param.ITEM_NAME, e.toString()).send();
+			
 			Analytics.$().report(e);
 		}
 
@@ -167,13 +166,13 @@ public class IslandProvisioning extends IntentService {
 			Log.d(TAG, "Enable profile now.");
 			policies.execute(DevicePolicyManager::setProfileEnabled);
 		}
-		Analytics.$().event("profile_post_provision_done").send();
+		
 
 		disableLauncherActivity(context);
 		prefs.edit().putInt(PREF_KEY_PROVISION_STATE, POST_PROVISION_REV).apply();
 
 		if (! launchMainActivityInOwnerUser(context)) {
-			Analytics.$().event("error_launch_main_ui").send();
+			
 			Log.e(TAG, "Failed to launch main activity in owner user.");
 			Toasts.show(context, R.string.toast_setup_complete, Toast.LENGTH_LONG);
 		}

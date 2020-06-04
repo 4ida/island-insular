@@ -76,7 +76,7 @@ public class MainActivity extends LifecycleActivity {
 			if (launcher_apps != null && ! (our_activities_in_launcher = launcher_apps.getActivityList(getPackageName(), profile)).isEmpty()
 					&& our_activities_in_launcher.get(0).getComponentName().getClassName().equals(MainActivity.class.getName())) {
 				// Main activity is left enabled, probably due to pending post-provisioning in manual setup. Some domestic ROMs may block implicit broadcast, causing ACTION_USER_INITIALIZE being dropped.
-				Analytics.$().event("profile_provision_leftover").send();
+				
 				Log.w(TAG, "Setup in Island is not complete, continue it now.");
 				try {
 					launcher_apps.startMainActivity(our_activities_in_launcher.get(0).getComponentName(), profile, null, null);
@@ -94,7 +94,7 @@ public class MainActivity extends LifecycleActivity {
 	private void onCreateInProfile() {
 		final DevicePolicies policies = new DevicePolicies(this);
 		if (! policies.invoke(DevicePolicyManager::isAdminActive)) {
-			Analytics.$().event("inactive_device_admin").send();
+			
 			startActivity(new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN)
 					.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, DeviceAdmins.getComponentName(this))
 					.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, getString(R.string.dialog_reactivate_message)));
@@ -104,12 +104,12 @@ public class MainActivity extends LifecycleActivity {
 		final List<ResolveInfo> resolve = pm.queryBroadcastReceivers(new Intent(Intent.ACTION_USER_INITIALIZE).setPackage(Modules.MODULE_ENGINE), 0);
 		if (! resolve.isEmpty()) {
 			Log.w(TAG, "Manual provisioning is pending, resume it now.");
-			Analytics.$().event("profile_post_provision_pending").send();
+			
 			final ActivityInfo receiver = resolve.get(0).activityInfo;
 			sendBroadcast(new Intent().setComponent(new ComponentName(receiver.packageName, receiver.name)));
 		} else {    // Receiver disabled but launcher entrance is left enabled. The best bet is just disabling the launcher entrance. No provisioning attempt any more.
 			Log.w(TAG, "Manual provisioning is finished, but launcher activity is still left enabled. Disable it now.");
-			Analytics.$().event("profile_post_provision_activity_leftover").send();
+			
 			pm.setComponentEnabledSetting(new ComponentName(this, getClass()), COMPONENT_ENABLED_STATE_DISABLED, DONT_KILL_APP);
 		}
 	}

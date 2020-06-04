@@ -42,7 +42,6 @@ public class IslandFiles {
 			return;
 		}
 		if (SDK_INT >= M) {
-			Analytics.$().event("file_shuttle_request").send();
 			com.oasisfeng.android.content.pm.Permissions.request(activity, WRITE_EXTERNAL_STORAGE, result -> {
 				if (result == PERMISSION_GRANTED) onPermissionGranted(activity);
 				else Toast.makeText(activity, R.string.toast_external_storage_permission_required, Toast.LENGTH_LONG).show();
@@ -52,7 +51,7 @@ public class IslandFiles {
 	}
 
 	private static void onPermissionGranted(final Context context) {
-		Analytics.$().event("file_shuttle_enable").send();
+		
 		final ComponentName component = Modules.getFileProviderComponent(context);
 		getProfilePackageManager(context).setComponentEnabledSetting(component, COMPONENT_ENABLED_STATE_ENABLED, DONT_KILL_APP);
 		// FIXME: Not enabling shuttle in owner user, as ExternalStorageProviderProxy is not working as expected in manger profile.

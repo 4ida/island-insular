@@ -69,8 +69,6 @@ import java9.util.function.Predicate;
 import java9.util.stream.Collectors;
 import java9.util.stream.StreamSupport;
 
-import static com.oasisfeng.island.analytics.Analytics.Param.ITEM_CATEGORY;
-import static com.oasisfeng.island.analytics.Analytics.Param.ITEM_ID;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -293,7 +291,7 @@ public class AppListViewModel extends BaseAppListViewModel<AppViewModel> {
 	public final void onItemLaunchIconClick(final Context context, final IslandAppInfo app) {
 		if (mSelection.getValue() == null) return;
 		final String pkg = app.packageName;
-		Analytics.$().event("action_launch").with(ITEM_ID, pkg).send();
+		
 		if (! app.isHidden()) {		// Not frozen, launch the app directly. TODO: If isBlocked() ?
 			if (! IslandManager.launchApp(context, pkg, app.user))
 				Toast.makeText(context, context.getString(R.string.toast_app_launch_failure, app.getLabel()), Toast.LENGTH_SHORT).show();
@@ -304,7 +302,7 @@ public class AppListViewModel extends BaseAppListViewModel<AppViewModel> {
 					if (! IslandManager.launchApp(context, pkg, app.user)) failure = "launcher_activity_not_found";
 				if (failure != null) {
 					Toast.makeText(context, R.string.toast_failed_to_launch_app, Toast.LENGTH_LONG).show();
-					Analytics.$().event("app_launch_error").with(ITEM_ID, pkg).with(ITEM_CATEGORY, "launcher_activity_not_found").send();
+					
 				}
 			}).exceptionally(t -> {
 				reportAndShowToastForInternalException(context, "Error unfreezing and launching app: " + pkg, t);
@@ -336,10 +334,10 @@ public class AppListViewModel extends BaseAppListViewModel<AppViewModel> {
 			clearSelection();
 		} else if (id == R.id.menu_clone_back) {
 			Activities.startActivity(context, new Intent(Intent.ACTION_INSTALL_PACKAGE, Uri.fromParts("package", pkg, null)));
-			Analytics.$().event("action_install_outside").with(ITEM_ID, pkg).send();
+			
 			clearSelection();
 		} else if (id == R.id.menu_freeze) {// Select the next alive app, or clear selection.
-			Analytics.$().event("action_freeze").with(ITEM_ID, pkg).send();
+			
 
 			final Activity activity = Activities.findActivityFrom(context);
 			if (activity != null && IslandAppListProvider.getInstance(context).isCritical(pkg)) {
@@ -347,7 +345,7 @@ public class AppListViewModel extends BaseAppListViewModel<AppViewModel> {
 						.withCancelButton().withOkButton(() -> freezeApp(context, selection)).show();
 			} else freezeApp(context, selection);
 		} else if (id == R.id.menu_unfreeze) {
-			Analytics.$().event("action_unfreeze").with(ITEM_ID, pkg).send();
+			
 			unfreeze(context, app).thenAccept(result -> {
 				if (! result) return;
 				refreshAppStateAsSysBugWorkaround(context, pkg);
@@ -426,7 +424,7 @@ public class AppListViewModel extends BaseAppListViewModel<AppViewModel> {
 		if (app_vm == null) return;
 		final IslandAppInfo app= app_vm.info();
 		final String pkg = app.packageName;
-		Analytics.$().event("action_create_shortcut").with(ITEM_ID, pkg).send();
+		
 		final String shortcut_prefix = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getString(R.string.key_launch_shortcut_prefix), context.getString(R.string.default_launch_shortcut_prefix));
 		final Boolean result = AbstractAppLaunchShortcut.createOnLauncher(context, pkg, app, app.user, shortcut_prefix + app.getLabel(), app.icon);
 		if (result == null || result) Toast.makeText(context, R.string.toast_shortcut_request_sent, Toast.LENGTH_SHORT).show();	// MIUI has no UI for shortcut pinning.
@@ -436,7 +434,7 @@ public class AppListViewModel extends BaseAppListViewModel<AppViewModel> {
 	private void onGreenifyRequested(final Context context) {
 		if (mSelection.getValue() == null) return;
 		final IslandAppInfo app = mSelection.getValue().info();
-		Analytics.$().event("action_greenify").with(ITEM_ID, app.packageName).send();
+		
 
 		final String mark = "greenify-explained";
 		final Boolean greenify_ready = GreenifyClient.checkGreenifyVersion(context);
@@ -464,10 +462,10 @@ public class AppListViewModel extends BaseAppListViewModel<AppViewModel> {
 	private void onRemovalRequested(final Context context) {
 		if (mSelection.getValue() == null) return;
 		final IslandAppInfo app = mSelection.getValue().info();
-		Analytics.$().event("action_uninstall").with(ITEM_ID, app.packageName).with(ITEM_CATEGORY, "system").send();
+		
 		unfreezeIfNeeded(context, app).thenAccept(unfrozen -> {
 			if (app.isSystem()) {
-				Analytics.$().event("action_disable_sys_app").with(ITEM_ID, app.packageName).send();
+				
 				final Activity activity = requireNonNull(Activities.findActivityFrom(context));
 				if (app.isCritical()) {
 					Dialogs.buildAlert(activity, R.string.dialog_title_warning, R.string.dialog_critical_app_warning).withCancelButton()

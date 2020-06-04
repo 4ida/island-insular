@@ -66,7 +66,7 @@ public class ServiceShuttle {
 					.filter((@NonNull ResolveInfo r) -> (r.activityInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0)
 					.map((@NonNull ResolveInfo r) -> new ComponentName(r.activityInfo.packageName, r.activityInfo.name)).findFirst().orElse(null);
 			if (sForwarderComponent == null) {
-				Analytics.$().event("shuttle_service_forwarder_unavailable").send();
+				
 				return false;	// DO NOT fallback to default component assumed, due to cross-profile intent filter may not properly created.
 			}
 		} catch (final RuntimeException e) {

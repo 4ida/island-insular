@@ -138,11 +138,11 @@ public abstract class AbstractAppLaunchShortcut extends Activity {
 			try {
 				target_intent = parseUri(intent_uri, URI_INTENT_SCHEME);
 			} catch (final URISyntaxException e) {
-				Analytics.$().event("invalid_shortcut_uri").with(Analytics.Param.LOCATION, intent_uri).send();
+				
 				return false;
 			}
 			if (! validateIncomingIntent(target_intent, intent)) {
-				Analytics.$().event("invalid_shortcut_signature").with(Analytics.Param.LOCATION, intent_uri).send();
+				
 				return false;
 			}
 			final String pkg = target_intent.getComponent() != null ? target_intent.getComponent().getPackageName() : target_intent.getPackage();
@@ -150,7 +150,7 @@ public abstract class AbstractAppLaunchShortcut extends Activity {
 			try {
 				startActivity(target_intent);
 			} catch (final ActivityNotFoundException e) {
-				Analytics.$().event("invalid_shortcut_uri").with(Analytics.Param.LOCATION, intent_uri).send();
+				
 				return false;
 			}
 			return true;

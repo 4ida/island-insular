@@ -50,7 +50,6 @@ import java9.util.stream.Collectors;
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.LOLLIPOP_MR1;
 import static android.os.Build.VERSION_CODES.M;
-import static com.oasisfeng.island.analytics.Analytics.Param.CONTENT;
 import static java9.util.stream.Collectors.joining;
 import static java9.util.stream.StreamSupport.stream;
 
@@ -81,8 +80,7 @@ public class IslandSetup {
 				if (result == null || result.isEmpty()) return;		// Just root failure
 				Analytics.$().event("setup_island_root_failed").withRaw("commands", stream(commands).collect(joining("\n")))
 						.withRaw("fw_max_users", String.valueOf(getSysPropMaxUsers()))
-						.withRaw("config_multiuserMaximumUsers", String.valueOf(getResConfigMaxUsers()))
-						.with(CONTENT, stream(result).collect(joining("\n"))).send();
+						.withRaw("config_multiuserMaximumUsers", String.valueOf(getResConfigMaxUsers()));
 				dismissProgressAndShowError(context, progress, 1);
 				return;
 			}
@@ -124,8 +122,6 @@ public class IslandSetup {
 		SafeAsyncTask.execute(activity, context -> Shell.SU.run(commands.toString()), (context, result) -> {
 			final LauncherApps launcher_apps = Objects.requireNonNull((LauncherApps) context.getSystemService(Context.LAUNCHER_APPS_SERVICE));
 			if (launcher_apps.getActivityList(context.getPackageName(), profile).isEmpty()) {
-				Analytics.$().event("setup_island_root_failed").withRaw("command", commands.toString())
-						.with(CONTENT, result == null ? "<null>" : stream(result).collect(joining("\n"))).send();
 				dismissProgressAndShowError(context, progress, 2);
 			}
 		});
@@ -177,11 +173,11 @@ public class IslandSetup {
 				return;
 			}
 			if (! "DONE".equals(output.get(output.size() - 1))) {
-				Analytics.$().event("setup_mainland_root").with(CONTENT, stream(output).collect(joining("\n"))).send();
+				
 				Toast.makeText(context, R.string.toast_setup_mainland_root_failed, Toast.LENGTH_LONG).show();
 				return;
 			}
-			Analytics.$().event("setup_mainland_root").with(CONTENT, output.size() == 1/* DONE */? null : stream(output).collect(joining("\n"))).send();
+			
 			// Start the device-admin activation UI (no-op if already activated with root above), since "dpm set-active-admin" is not supported on Android 5.0.
 			fragment.startActivityForResult(new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN)
 					.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, DeviceAdmins.getComponentName(context))
@@ -221,7 +217,6 @@ public class IslandSetup {
 	}
 
 	private static void deactivateDeviceOrProfileOwner(final Activity activity) {
-		Analytics.$().event("action_deactivate").send();
 		final DevicePolicies policies = new DevicePolicies(activity);
 		if (policies.isActiveDeviceOwner())
 			policies.getManager().clearDeviceOwnerApp(activity.getPackageName());
@@ -273,7 +268,7 @@ public class IslandSetup {
 		if (intent.resolveActivity(activity.getPackageManager()) != null)
 			dialog.setPositiveButton(R.string.open_settings, (d, w) -> activity.startActivity(intent));
 		dialog.show();
-		Analytics.$().event("cannot_destroy").send();
+		
 	}
 
 	@ProfileUser private static void destroyProfile(final Activity activity) {
