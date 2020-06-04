@@ -9,7 +9,6 @@ import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.firebase.FirebaseApp;
 import com.oasisfeng.condom.CondomContext;
 import com.oasisfeng.condom.CondomKit;
 import com.oasisfeng.condom.CondomOptions;
@@ -42,9 +41,8 @@ import androidx.annotation.NonNull;
 			// and suppress the annoying notification of GMS missing or upgrade required.
 			final CondomContext condom = CondomContext.wrap(context, "Firebase", new CondomOptions()
 					.setOutboundJudge((t, i, pkg) -> ! "com.google.android.gms".equals(pkg)).addKit(new NotificationKit()).addKit(new PowerManagerKit()));
-			FirebaseApp.initializeApp(condom);
 			context = condom;
-		} else FirebaseApp.initializeApp(context);
+		};
 		sFirebaseContext = context;
 	}
 

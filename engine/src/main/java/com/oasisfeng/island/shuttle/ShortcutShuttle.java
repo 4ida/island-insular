@@ -31,8 +31,6 @@ import androidx.core.content.pm.ShortcutInfoCompat;
 import androidx.core.content.pm.ShortcutManagerCompat;
 import androidx.core.graphics.drawable.IconCompat;
 
-import static com.oasisfeng.island.analytics.Analytics.Param.ITEM_CATEGORY;
-import static com.oasisfeng.island.analytics.Analytics.Param.ITEM_ID;
 
 /**
  * Redirect shortcut creation request to owner user.
@@ -57,7 +55,7 @@ public class ShortcutShuttle extends BroadcastReceiver {
 				final String signature = Cryptography.sign(context, target_intent_uri);
 				intent.putExtra(AppLaunchShortcut.EXTRA_SIGNATURE, signature);
 			} catch (final GeneralSecurityException | ProviderException e) {
-				Analytics.$().event("intent_sign_error").with(ITEM_ID, target_intent_uri).with(ITEM_CATEGORY, e.getClass().getCanonicalName()).send();
+				
 				Analytics.$().report(e);
 			}
 			// Send to myself in owner user, handled above.

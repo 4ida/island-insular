@@ -6,10 +6,6 @@ import android.content.pm.LauncherApps
 import android.os.AsyncTask
 import android.os.Bundle
 import android.widget.Toast
-import com.google.firebase.appindexing.Action
-import com.google.firebase.appindexing.Action.Builder.ACTIVATE_ACTION
-import com.google.firebase.appindexing.Action.Metadata
-import com.google.firebase.appindexing.FirebaseUserActions
 import com.oasisfeng.android.widget.Toasts
 import com.oasisfeng.island.mobile.BuildConfig
 import com.oasisfeng.island.shortcut.AbstractAppLaunchShortcut
@@ -44,9 +40,6 @@ class FeatureActionActivity : CallerAwareActivity() {
             findApp(query)?.also { activity ->
                 val pkg = activity.componentName.packageName
                 MethodShuttle.runInProfile(this) { context -> AbstractAppLaunchShortcut.launchApp(context, pkg) }
-                if (caller == PACKAGE_GOOGLE_SEARCH || caller == PACKAGE_GOOGLE_ASSISTANT_GO)    // Send action acknowledgement to Google Assistant
-                    FirebaseUserActions.getInstance().end(Action.Builder(ACTIVATE_ACTION).setMetadata(Metadata.Builder().setUpload(false))
-                            .setObject(activity.label.toString(), data.toString()).build())
             } ?: Toasts.showLong(this, "Not found: $query")
         }
     }

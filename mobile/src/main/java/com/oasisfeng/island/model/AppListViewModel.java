@@ -297,10 +297,10 @@ public class AppListViewModel extends BaseAppListViewModel<AppViewModel> {
 			clearSelection();
 		} else if (id == R.id.menu_clone_back) {
 			Activities.startActivity(context, new Intent(Intent.ACTION_INSTALL_PACKAGE, Uri.fromParts("package", pkg, null)));
-			Analytics.$().event("action_install_outside").with(ITEM_ID, pkg).send();
+			
 			clearSelection();
 		} else if (id == R.id.menu_freeze) {// Select the next alive app, or clear selection.
-			Analytics.$().event("action_freeze").with(ITEM_ID, pkg).send();
+			
 
 			final Activity activity = Activities.findActivityFrom(context);
 			if (activity != null && IslandAppListProvider.getInstance(context).isCritical(pkg)) {
@@ -308,7 +308,6 @@ public class AppListViewModel extends BaseAppListViewModel<AppViewModel> {
 						.withCancelButton().withOkButton(() -> freezeApp(context, selection)).show();
 			} else freezeApp(context, selection);
 		} else if (id == R.id.menu_unfreeze) {
-			Analytics.$().event("action_unfreeze").with(ITEM_ID, pkg).send();
 			IslandAppControl.unfreeze(context, app).thenAccept(result -> {
 				if (! result) return;
 				refreshAppStateAsSysBugWorkaround(context, pkg);
@@ -381,7 +380,7 @@ FIXME:		MethodShuttle.runInProfile(context, () -> IslandManager.ensureAppHiddenS
 		if (app_vm == null) return;
 		final IslandAppInfo app= app_vm.info();
 		final String pkg = app.packageName;
-		Analytics.$().event("action_create_shortcut").with(ITEM_ID, pkg).send();
+		
 		final String shortcut_prefix = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getString(R.string.key_launch_shortcut_prefix), context.getString(R.string.default_launch_shortcut_prefix));
 		final Boolean result = AbstractAppLaunchShortcut.createOnLauncher(context, pkg, app, app.user, shortcut_prefix + app.getLabel(), app.icon);
 		if (result == null || result) Toast.makeText(context, R.string.toast_shortcut_request_sent, Toast.LENGTH_SHORT).show();	// MIUI has no UI for shortcut pinning.
@@ -391,7 +390,7 @@ FIXME:		MethodShuttle.runInProfile(context, () -> IslandManager.ensureAppHiddenS
 	private void onGreenifyRequested(final Context context) {
 		if (mSelection.getValue() == null) return;
 		final IslandAppInfo app = mSelection.getValue().info();
-		Analytics.$().event("action_greenify").with(ITEM_ID, app.packageName).send();
+		
 
 		final String mark = "greenify-explained";
 		final Boolean greenify_ready = GreenifyClient.checkGreenifyVersion(context);

@@ -40,8 +40,6 @@ import java.util.Optional;
 import static android.app.admin.DevicePolicyManager.ACTION_PROVISION_MANAGED_PROFILE;
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.O;
-import static com.oasisfeng.island.analytics.Analytics.Param.ITEM_ID;
-import static com.oasisfeng.island.analytics.Analytics.Param.ITEM_NAME;
 
 /**
  * View model for setup fragment
@@ -94,7 +92,6 @@ public class SetupViewModel implements Parcelable {
 			final ComponentName profile_owner = owner.get();
 			if (! Modules.MODULE_ENGINE.equals(profile_owner.getPackageName())) {
 				final CharSequence label = readOwnerLabel(context, profile_owner);
-				reason("existent_work_profile").with(ITEM_ID, profile_owner.getPackageName()).with(ITEM_NAME, label != null ? label.toString() : null).send();
 				continue;
 			}
 			if (ignore_incomplete_setup) continue;
@@ -103,8 +100,6 @@ public class SetupViewModel implements Parcelable {
 
 		// DPM.isProvisioningAllowed() is the one-stop prerequisites checking.
 		final DevicePolicyManager dpm = context.getSystemService(DevicePolicyManager.class);
-		if (dpm != null && dpm.isProvisioningAllowed(DevicePolicyManager.ACTION_PROVISION_MANAGED_DEVICE))
-			Analytics.$().event("device_provision_allowed").send();	// Special analytics
 		if (dpm != null && dpm.isProvisioningAllowed(ACTION_PROVISION_MANAGED_PROFILE)) return null;
 
 		final boolean has_managed_users = pm.hasSystemFeature(PackageManager.FEATURE_MANAGED_USERS);
@@ -129,7 +124,7 @@ public class SetupViewModel implements Parcelable {
 	}
 
 	private static Analytics.Event reason(final String reason) {
-		return Analytics.$().event("setup_island_failure").with(Analytics.Param.ITEM_CATEGORY, reason);
+		return Analytics.$().event("setup_island_failure");
 	}
 
 	public void onExtraButtonClick(final View view) {
@@ -153,13 +148,13 @@ public class SetupViewModel implements Parcelable {
 		if (request != REQUEST_PROVISION_MANAGED_PROFILE) return null;
 		if (result == Activity.RESULT_CANCELED) {
 			Log.i(TAG, "Provision is cancelled.");
-			Analytics.$().event("profile_provision_sys_activity_canceled").send();
+			
 			return buildErrorVM(R.string.setup_solution_for_cancelled_provision, reason("provisioning_cancelled"))
 					.withExtraAction(R.string.button_setup_island_with_root).withNextButton(R.string.button_setup_troubleshooting);
 		}
 		if (result == Activity.RESULT_OK) {
 			Log.i(TAG, "System provision activity is done.");
-			Analytics.$().event("profile_provision_sys_activity_done").send();
+			
 			Toast.makeText(activity, R.string.toast_setup_in_progress, Toast.LENGTH_LONG).show();
 			activity.finish();
 		}
@@ -171,7 +166,6 @@ public class SetupViewModel implements Parcelable {
 		final Intent intent = buildManagedProfileProvisioningIntent(activity);
 		try {
 			fragment.startActivityForResult(intent, REQUEST_PROVISION_MANAGED_PROFILE);
-			Analytics.$().event("profile_provision_sys_activity_start").send();
 		} catch (final IllegalStateException e) {	// Fragment not in proper state
 			activity.startActivity(intent);				// Fall-back to starting activity without result observation.
 			activity.finish();

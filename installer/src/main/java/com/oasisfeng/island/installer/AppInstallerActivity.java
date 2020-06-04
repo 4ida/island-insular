@@ -76,9 +76,6 @@ import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.O;
 import static android.os.Build.VERSION_CODES.P;
 import static android.provider.Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES;
-import static com.oasisfeng.island.analytics.Analytics.Param.CONTENT;
-import static com.oasisfeng.island.analytics.Analytics.Param.ITEM_CATEGORY;
-import static com.oasisfeng.island.analytics.Analytics.Param.LOCATION;
 import static java.util.Objects.requireNonNull;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
@@ -293,7 +290,7 @@ public class AppInstallerActivity extends CallerAwareActivity {
 
 	private void fallbackToSystemPackageInstaller(final String reason, final @Nullable Exception e) {
 		final Intent intent = new Intent(getIntent()).setPackage(null).setComponent(null);
-		Analytics.$().event("installer_fallback").with(LOCATION, intent.getDataString()).with(ITEM_CATEGORY, reason).with(CONTENT, e != null ? e.toString() : null).send();
+		
 		for (final String category : Optional.ofNullable(intent.getCategories()).orElse(Collections.emptySet())) intent.removeCategory(category);
 
 		if (SDK_INT >= O && ! Users.isOwner() && SCHEME_PACKAGE.equals(intent.getScheme())) {	// Scheme "package" is no go in managed profile since Android O.
@@ -422,7 +419,7 @@ public class AppInstallerActivity extends CallerAwareActivity {
 				performInstall(uri, getString(R.string.description_for_installing_split, Apps.of(context).getAppName(pkg)), pkg);
 				return;
 			}
-			Analytics.$().event("installer_failure").with(LOCATION, uri.toString()).with(CONTENT, message).send();
+			
 			if (mResultNeeded)		// The exact same result data as InstallFailed in PackageInstaller
 				activity.setResult(Activity.RESULT_FIRST_USER, new Intent().putExtra(EXTRA_INSTALL_RESULT, legacy_status));
 			if (isFinishing()) {
