@@ -7,8 +7,6 @@ import android.content.Context;
 import android.os.PowerManager;
 import android.util.Log;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
 import com.oasisfeng.condom.CondomContext;
 import com.oasisfeng.condom.CondomKit;
 import com.oasisfeng.condom.CondomOptions;
@@ -47,9 +45,7 @@ import androidx.annotation.NonNull;
 	}
 
 	private static boolean isGooglePlayServicesReady(final Context context) {
-		if (context.getPackageManager().resolveContentProvider("com.google.android.gsf.gservices", 0) == null) return false;
-		final int gms_availability = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(context);
-		return gms_availability == ConnectionResult.SUCCESS;
+		return false;
 	}
 
 	private static class NotificationKit implements CondomKit {
