@@ -5,6 +5,9 @@ include:
 .checkout-deagle: &checkout_deagle
     - git clone https://github.com/oasisfeng/deagle ../deagle -b dev
 
+variables:
+  GRADLE_OPTS: -Dorg.gradle.daemon=false
+
 AssembleDebug:
   extends:
     - .android-base
