@@ -76,6 +76,3 @@ dependencies {
     // File Provider only
     fileproviderImplementation project(':fileprovider')
 }
-
-// Firebase plug-in
-apply plugin: 'com.google.gms.google-services'

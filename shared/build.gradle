@@ -49,7 +49,6 @@ dependencies {
     implementation project(':legacy')
     implementation 'org.jetbrains:annotations:15.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.google.android.gms:play-services-analytics:17.0.0'
     implementation 'com.oasisfeng.condom:library:2.5.0'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.10.0'
