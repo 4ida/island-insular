@@ -4,9 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 import com.oasisfeng.island.IslandApplication;
 import com.oasisfeng.island.firebase.FirebaseWrapper;
 import com.oasisfeng.island.shared.BuildConfig;
@@ -60,14 +57,9 @@ class AnalyticsImpl implements Analytics {
 	}
 
 	@Override public void setProperty(final Property property, final String value) {
-		mGoogleAnalytics.set("&cd" + property.ordinal() + 1, value);	// Custom dimension (index >= 1)
 	}
 
 	private AnalyticsImpl(final Context context) {
-		final GoogleAnalytics google_analytics = GoogleAnalytics.getInstance(context);
-		if (BuildConfig.DEBUG) google_analytics.setDryRun(true);
-		mGoogleAnalytics = google_analytics.newTracker(R.xml.analytics_tracker);
-		mGoogleAnalytics.enableAdvertisingIdCollection(true);
 
 		// TODO: De-dup the user identity between Mainland and Island.
 	}
@@ -76,7 +68,6 @@ class AnalyticsImpl implements Analytics {
 		return sSingleton;
 	}
 
-	private final Tracker mGoogleAnalytics;
 	private static final AnalyticsImpl sSingleton = new AnalyticsImpl(IslandApplication.$());
 
 	private static final String TAG = "Analytics";
