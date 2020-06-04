@@ -16,7 +16,6 @@ import java.util.List;
 import static android.content.Context.DEVICE_POLICY_SERVICE;
 import static android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
 import static android.content.pm.PackageManager.DONT_KILL_APP;
-import static com.oasisfeng.island.analytics.Analytics.Param.ITEM_ID;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -42,7 +41,7 @@ public class DeviceAdmins {
 			final ResolveInfo admin = admins.get(0);
 			sDeviceAdminComponent = new ComponentName(Modules.MODULE_ENGINE, admins.get(0).activityInfo.name);
 			if (! admin.activityInfo.enabled) {
-				Analytics.$().event("device_admin_component_disabled").with(ITEM_ID, sDeviceAdminComponent.flattenToShortString()).send();
+				
 				context.getPackageManager().setComponentEnabledSetting(sDeviceAdminComponent, COMPONENT_ENABLED_STATE_ENABLED, DONT_KILL_APP);
 			}
 			return sDeviceAdminComponent;

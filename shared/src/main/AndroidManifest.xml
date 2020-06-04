@@ -8,39 +8,12 @@
 
     <application android:name="com.oasisfeng.island.IslandApplication" tools:ignore="AllowBackup,GoogleAppIndexingWarning,MissingApplicationIcon">
 
-        <meta-data android:name="firebase_crashlytics_collection_enabled" android:value="false" />
-
         <!-- Users -->
         <provider android:name="com.oasisfeng.island.InternalContentProviders$_1"
                   android:initOrder="1000"
                   android:authorities="${applicationId}.internal.1"
                   android:directBootAware="true" tools:targetApi="N"
                   android:exported="false" />
-
-        <!-- Disable the default heavy-weight initialization of Firebase -->
-        <provider android:name="com.google.firebase.provider.FirebaseInitProvider"
-                  android:authorities="${applicationId}.firebaseinitprovider"
-                  tools:node="remove" tools:ignore="ExportedContentProvider"/>
-
-        <!-- Google Analytics (required for devices without GMS) -->
-        <receiver android:name="com.google.android.gms.analytics.AnalyticsReceiver" android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.android.gms.analytics.ANALYTICS_DISPATCH" />
-            </intent-filter>
-        </receiver>
-        <service android:name="com.google.android.gms.analytics.AnalyticsService" android:exported="false" />
-
-        <!-- Override the original FirebaseInstanceIdService with explicit initialization due for lazy initialization of Firebase -->
-        <service tools:node="remove" android:name="com.google.firebase.iid.FirebaseInstanceIdService" />
-        <service android:name="com.oasisfeng.island.firebase.LazyFirebaseInstanceIdService" android:exported="true" tools:ignore="ExportedService">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
-            </intent-filter>
-        </service>
-
-        <!-- Workaround issue of Firebase Analytics - IllegalStateException: Not allowed to start service Intent ... app is in background uid ... -->
-        <receiver android:name="com.google.android.gms.measurement.AppMeasurementReceiver" android:enabled="@bool/until_api_24" tools:replace="android:enabled" />
-
     </application>
 
 </manifest>

@@ -48,8 +48,6 @@ import static android.content.Context.CONTEXT_INCLUDE_CODE;
 import static android.os.Build.VERSION_CODES.N;
 import static android.os.Build.VERSION_CODES.O;
 import static android.provider.DocumentsContract.PROVIDER_INTERFACE;
-import static com.oasisfeng.island.analytics.Analytics.Param.ITEM_CATEGORY;
-import static com.oasisfeng.island.analytics.Analytics.Param.ITEM_ID;
 
 /**
  * Documents provider for accessing files in / outside Island.
@@ -236,8 +234,7 @@ public class ExternalStorageProviderProxy extends ContentProvider {
 					return method.invoke(content_service, args);
 				});
 				ContentResolver_sContentService.set(null, proxy);
-			} else Analytics.$().event("esp_proxy_error").with(ITEM_CATEGORY, "content_service_proxy")
-					.with(ITEM_ID, Proxy.getInvocationHandler(content_service).getClass().getCanonicalName()).send();
+			};
 
 			final Context context = context().createPackageContext(target_provider.packageName, CONTEXT_INCLUDE_CODE | CONTEXT_IGNORE_SECURITY);
 			Log.d(TAG, "Initializing " + target_provider.name);
@@ -260,10 +257,8 @@ public class ExternalStorageProviderProxy extends ContentProvider {
 		final ProviderInfo provider = pm.resolveContentProvider(TARGET_AUTHORITY, 0);
 		final String error_event = "esp_error";
 		if (provider != null) {
-			if (! provider.exported) Analytics.$().event(error_event).with(ITEM_CATEGORY, "not exported").send();
-			else if (! MANAGE_DOCUMENTS.equals(provider.readPermission))
-				Analytics.$().event(error_event).with(ITEM_CATEGORY, "permission").with(ITEM_ID, provider.readPermission).send();
-			else return provider;
+			if (provider.exported && MANAGE_DOCUMENTS.equals(provider.readPermission))
+				return provider;
 		}
 
 		// In case authority cannot be found, try enumerating documents providers in package of its well-known name. (Fixed authority name is unnecessary for documents provider)
@@ -278,11 +273,10 @@ public class ExternalStorageProviderProxy extends ContentProvider {
 			for (final ResolveInfo resolve : resolves) {
 				final String authority = resolve.providerInfo.authority;
 				final String info = resolve.toString();
-				Analytics.$().event(error_event).with(ITEM_CATEGORY, "indistinguishable").with(ITEM_ID, authority + ":" + info).send();
+				
 				Log.w(TAG, ">> " + authority + ": " + info);
 			}
-		} else Analytics.$().event(error_event).with(ITEM_CATEGORY, "authority").with(ITEM_ID, first_resolve.providerInfo.authority).send();
-
+		}
 		return first_resolve.providerInfo;
 	}
 

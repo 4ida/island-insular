@@ -47,8 +47,6 @@ import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.M;
 import static android.os.Build.VERSION_CODES.N;
 import static android.os.Build.VERSION_CODES.O;
-import static com.oasisfeng.island.analytics.Analytics.Param.ITEM_ID;
-import static com.oasisfeng.island.analytics.Analytics.Param.ITEM_NAME;
 
 /**
  * View model for setup fragment
@@ -93,7 +91,6 @@ public class SetupViewModel implements Parcelable {
 					SafeAsyncTask.execute(activity, _a -> {
 						try {		// Worker thread
 							Shell.SU.run("setprop persist.sys.no_req_encrypt 1");
-							if (! isEncryptionRequired()) Analytics.$().event("encryption_skipped").send();
 						} catch (final Exception e) {
 							Log.e(TAG, "Error running root command", e);
 						}
@@ -128,7 +125,6 @@ public class SetupViewModel implements Parcelable {
 			final ComponentName profile_owner = owner.get();
 			if (! Modules.MODULE_ENGINE.equals(profile_owner.getPackageName())) {
 				final CharSequence label = readOwnerLabel(context, profile_owner);
-				reason("existent_work_profile").with(ITEM_ID, profile_owner.getPackageName()).with(ITEM_NAME, label != null ? label.toString() : null).send();
 				continue;
 			}
 			if (ignore_incomplete_setup) continue;
@@ -139,7 +135,7 @@ public class SetupViewModel implements Parcelable {
 		if (SDK_INT >= N) {
 			final DevicePolicyManager dpm = context.getSystemService(DevicePolicyManager.class);
 			if (dpm != null && dpm.isProvisioningAllowed(DevicePolicyManager.ACTION_PROVISION_MANAGED_DEVICE))
-				Analytics.$().event("device_provision_allowed").send();	// Special analytics
+					// Special analytics
 			if (dpm != null && dpm.isProvisioningAllowed(ACTION_PROVISION_MANAGED_PROFILE)) return null;
 		}
 
@@ -152,7 +148,7 @@ public class SetupViewModel implements Parcelable {
 			if (sys_prop_max_users == null || sys_prop_max_users == -1) {
 				final Integer res_config_max_users = IslandSetup.getResConfigMaxUsers();
 				if (res_config_max_users == null || res_config_max_users < 2)
-					return buildErrorVM(R.string.setup_error_multi_user_not_allowed, reason(IslandSetup.RES_MAX_USERS).with(ITEM_ID, String.valueOf(res_config_max_users)));
+					return buildErrorVM(R.string.setup_error_multi_user_not_allowed, reason(IslandSetup.RES_MAX_USERS));
 			} else if (sys_prop_max_users < 2) return buildErrorVM(R.string.setup_error_multi_user_not_allowed, reason("fw.max_users"));
 		}
 
@@ -164,7 +160,7 @@ public class SetupViewModel implements Parcelable {
 					owner_label = pm.getApplicationInfo(device_owner, PackageManager.GET_UNINSTALLED_PACKAGES).loadLabel(pm);
 				} catch (final PackageManager.NameNotFoundException ignored) {}		// Should never happen.
 
-				final SetupViewModel error = buildErrorVM(R.string.setup_error_managed_device, reason("managed_device").with(ITEM_ID, device_owner));
+				final SetupViewModel error = buildErrorVM(R.string.setup_error_managed_device, reason("managed_device"));
 				error.message_params = new String[] { owner_label != null ? owner_label.toString() : device_owner };
 				error.action_extra = 0;		// Disable the manual-setup prompt, because device owner cannot be removed by 3rd-party.
 				return error;
@@ -176,7 +172,7 @@ public class SetupViewModel implements Parcelable {
 	}
 
 	private static Analytics.Event reason(final String reason) {
-		return Analytics.$().event("setup_island_failure").with(Analytics.Param.ITEM_CATEGORY, reason);
+		return Analytics.$().event("setup_island_failure");
 	}
 
 	private static boolean isEncryptionRequired() {
@@ -212,13 +208,13 @@ public class SetupViewModel implements Parcelable {
 		if (request != REQUEST_PROVISION_MANAGED_PROFILE) return null;
 		if (result == Activity.RESULT_CANCELED) {
 			Log.i(TAG, "Provision is cancelled.");
-			Analytics.$().event("profile_provision_sys_activity_canceled").send();
+			
 			return buildErrorVM(R.string.setup_solution_for_cancelled_provision, reason("provisioning_cancelled"))
 					.withExtraAction(R.string.button_setup_island_with_root).withNextButton(R.string.button_setup_troubleshooting);
 		}
 		if (result == Activity.RESULT_OK) {
 			Log.i(TAG, "System provision activity is done.");
-			Analytics.$().event("profile_provision_sys_activity_done").send();
+			
 			Toast.makeText(activity, R.string.toast_setup_in_progress, Toast.LENGTH_LONG).show();
 			activity.finish();
 		}
@@ -230,7 +226,7 @@ public class SetupViewModel implements Parcelable {
 		final Intent intent = buildManagedProfileProvisioningIntent(activity);
 		try {
 			fragment.startActivityForResult(intent, REQUEST_PROVISION_MANAGED_PROFILE);
-			Analytics.$().event("profile_provision_sys_activity_start").send();
+			
 			if (SDK_INT < M) activity.finish();			// No activity result on Android 5.x, thus we have to finish the activity now.
 		} catch (final IllegalStateException e) {	// Fragment not in proper state
 			activity.startActivity(intent);				// Fall-back to starting activity without result observation.

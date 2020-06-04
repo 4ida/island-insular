@@ -55,7 +55,6 @@ public class Permissions extends com.oasisfeng.android.content.pm.Permissions {
 		if (Users.isProfileManagedByIsland() && ! new DevicePolicies(context).isProfileOwner()) return false;
 		final boolean result = new DevicePolicies(context).invoke((dpm, admin) ->
 				dpm.setPermissionGrantState(admin, context.getPackageName(), permission, DevicePolicyManager.PERMISSION_GRANT_STATE_GRANTED));
-		if (! result) Analytics.$().event("permission_failure").withRaw("permission", permission).withRaw("SP", sp).send();
 		return result;
 	}
 

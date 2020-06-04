@@ -50,8 +50,6 @@ import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.N;
 import static android.os.Build.VERSION_CODES.O;
 import static android.os.Build.VERSION_CODES.P;
-import static com.oasisfeng.island.analytics.Analytics.Param.ITEM_CATEGORY;
-import static com.oasisfeng.island.analytics.Analytics.Param.ITEM_ID;
 
 /**
  * Controller for complex procedures of Island.
@@ -73,7 +71,7 @@ public class IslandAppClones {
 	public static void cloneApp(final Context context, final IslandAppInfo source) {
 		final String pkg = source.packageName;
 		if (source.isSystem()) {
-			Analytics.$().event("clone_sys").with(ITEM_ID, pkg).send();
+			
 			MethodShuttle.runInProfile(context, () -> new DevicePolicies(context).enableSystemApp(pkg)).thenAccept(enabled ->
 				Toast.makeText(context, context.getString(enabled ? R.string.toast_successfully_cloned : R.string.toast_cannot_clone, source.getLabel()),
 						enabled ? Toast.LENGTH_SHORT : Toast.LENGTH_LONG).show()
@@ -97,24 +95,23 @@ public class IslandAppClones {
 				else Toast.makeText(context, R.string.dialog_clone_incapable_explanation, Toast.LENGTH_LONG).show();
 				break;
 			case CLONE_RESULT_OK_INSTALL:
-				Analytics.$().event("clone_install").with(ITEM_ID, pkg).send();
+				
 				final UserHandle profile = Objects.requireNonNull(Users.profile);
 				if (SDK_INT >= O) cloneAppViaRootWithFallback(context, source, profile, IslandAppClones::cloneAppViaInstaller);
 				else cloneAppViaInstaller(context, source);
 				break;
 			case CLONE_RESULT_OK_INSTALL_EXISTING:
-				Analytics.$().event("clone_install_existing").with(ITEM_ID, pkg).send();
+				
 				doCloneUserApp(context, source);		// No explanation needed.
 				break;
 			case CLONE_RESULT_OK_GOOGLE_PLAY:
-				Analytics.$().event("clone_via_play").with(ITEM_ID, pkg).send();
+				
 				showExplanationBeforeCloning("clone-via-google-play-explained", context, R.string.dialog_clone_via_google_play_explanation, source);
 				break;
 			case CLONE_RESULT_UNKNOWN_SYS_MARKET:
 				final Intent market_intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + pkg)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				final ActivityInfo market_info = market_intent.resolveActivityInfo(context.getPackageManager(), PackageManager.MATCH_DEFAULT_ONLY);
-				if (market_info != null && (market_info.applicationInfo.flags & FLAG_SYSTEM) != 0)
-					Analytics.$().event("clone_via_market").with(ITEM_ID, pkg).with(ITEM_CATEGORY, market_info.packageName).send();
+					
 				showExplanationBeforeCloning("clone-via-sys-market-explained", context, R.string.dialog_clone_via_sys_market_explanation, source);
 				break;
 			case CLONE_RESULT_NOT_FOUND:
