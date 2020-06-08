@@ -44,7 +44,6 @@ public enum Config {
             default:
                 return "";
         }
-        return "";
 	}
 
 
