@@ -9,7 +9,7 @@ import com.oasisfeng.island.controller.IslandAppClones;
 import com.oasisfeng.island.data.IslandAppInfo;
 import com.oasisfeng.island.data.IslandAppListProvider;
 import com.oasisfeng.island.engine.IslandManager;
-import com.oasisfeng.island.mobile.R;
+import org.securesystem.insular.R;
 import com.oasisfeng.island.provisioning.CriticalAppsManager;
 import com.oasisfeng.island.shuttle.MethodShuttle;
 import com.oasisfeng.island.util.Users;

@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import com.oasisfeng.android.app.LifecycleActivity;
 import com.oasisfeng.androidx.biometric.BiometricPrompt;
-import com.oasisfeng.island.mobile.R;
+import org.securesystem.insular.R;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;

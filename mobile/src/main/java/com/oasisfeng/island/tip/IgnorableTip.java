@@ -3,7 +3,7 @@ package com.oasisfeng.island.tip;
 import android.content.Context;
 
 import com.oasisfeng.android.base.Scopes;
-import com.oasisfeng.island.mobile.R;
+import org.securesystem.insular.R;
 import com.oasisfeng.ui.card.CardViewModel;
 
 import androidx.annotation.Nullable;

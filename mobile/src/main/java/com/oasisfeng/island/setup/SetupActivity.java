@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.android.setupwizardlib.util.SystemBarHelper;
-import com.oasisfeng.island.mobile.R;
+import org.securesystem.insular.R;
 
 /**
  * Island setup wizard

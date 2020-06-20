@@ -15,7 +15,7 @@ import com.oasisfeng.android.app.LifecycleActivity;
 import com.oasisfeng.android.ui.Snackbars;
 import com.oasisfeng.island.analytics.Analytics;
 import com.oasisfeng.island.data.LiveUserRestriction;
-import com.oasisfeng.island.mobile.R;
+import org.securesystem.insular.R;
 import com.oasisfeng.island.security.SecurityPrompt;
 import com.oasisfeng.island.shuttle.MethodShuttle;
 import com.oasisfeng.island.util.DevicePolicies;

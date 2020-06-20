@@ -1,12 +1,11 @@
 [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://gitlab.com/secure-system/island) 
 
-# Island
-
-Island for Android
+# Insular
+Insular for Android
 
 ## Build Instruction
 
-Island depends on ["deagle" library](https://github.com/oasisfeng/deagle), which must be cloned alongside Island in the same path.
+Insular depends on ["deagle" library](https://github.com/oasisfeng/deagle), which must be cloned alongside Insular in the same path.
 
 ```
 \--

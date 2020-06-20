@@ -9,7 +9,7 @@
         <import type="com.oasisfeng.island.model.AppViewModel.State" />
         <import type="android.view.View" />
         <import type="com.google.android.material.bottomsheet.BottomSheetBehavior" />
-        <import type="com.oasisfeng.island.mobile.BuildConfig" />
+        <import type="org.securesystem.insular.BuildConfig" />
         <variable name="apps" type="com.oasisfeng.island.model.AppListViewModel" />
         <variable name="featured" type="com.oasisfeng.island.featured.FeaturedListViewModel" />
         <variable name="card" type="com.oasisfeng.ui.card.CardViewModel" />
@@ -163,7 +163,7 @@
                 android:background="?android:attr/colorPrimaryDark"
                 android:theme="@android:style/ThemeOverlay.Material.Dark.ActionBar"
                 android:popupTheme="@style/AppThemeOverlay.Dark.Popup"
-                android:title="@{apps.mSelection.info.label}" tools:title="Island"
+                android:title="@{apps.mSelection.info.label}" tools:title="Insular"
                 bind:menu="@{apps.actions_menu}"
                 android:onMenuItemClick="@{item -> apps.onActionClick(context, item)}"
                 android:prompt="@{guide.prompt_action}"/>

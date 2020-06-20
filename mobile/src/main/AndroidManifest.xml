@@ -1,4 +1,4 @@
-<manifest package="com.oasisfeng.island.mobile" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" >
+<manifest package="org.securesystem.insular" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" >
 
     <uses-feature android:name="android.software.device_admin" android:required="true" />
     <uses-feature android:name="android.software.managed_users" android:required="true" />
@@ -12,7 +12,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" /> <!-- UninstallHelper.UninstallReceiver -->
     <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" /> <!-- Required to start ACTION_UNINSTALL_PACKAGE since Android P -->
 
-    <application android:label="Island - Mobile"
+    <application android:label="Insular - Mobile"
                  android:icon="@mipmap/ic_launcher"
                  android:roundIcon="@mipmap/ic_launcher_round"
                  android:supportsRtl="true"
@@ -29,7 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter android:priority="-1"> <!-- Used by IslandProvisioning to launch this activity from Island after successful provisioning -->
+            <intent-filter android:priority="-1"> <!-- Used by IslandProvisioning to launch this activity from Insular after successful provisioning -->
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.oasisfeng.island.category.MAIN_ACTIVITY" />
@@ -80,7 +80,7 @@
         <activity android:name="com.oasisfeng.island.settings.IslandSettingsActivity"
                   android:label="@string/label_activity_island_settings"
                   android:theme="@style/AppTheme.Settings"
-                  android:enabled="false"> <!-- Enabled explicitly for managed profiles during Island setup -->
+                  android:enabled="false"> <!-- Enabled explicitly for managed profiles during Insular setup -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

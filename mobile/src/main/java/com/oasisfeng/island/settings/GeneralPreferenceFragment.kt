@@ -10,11 +10,11 @@ import android.os.Build.VERSION_CODES.P
 import android.os.Bundle
 import android.preference.TwoStatePreference
 import com.oasisfeng.android.ui.Dialogs
-import com.oasisfeng.island.appops.AppOpsCompat.GET_APP_OPS_STATS
-import com.oasisfeng.island.mobile.R
-import com.oasisfeng.island.util.DevicePolicies
-import com.oasisfeng.island.util.Modules
-import com.oasisfeng.island.util.Permissions
+import org.securesystem.insular.appops.AppOpsCompat.GET_APP_OPS_STATS
+import org.securesystem.insular.mobile.R
+import org.securesystem.insular.util.DevicePolicies
+import org.securesystem.insular.util.Modules
+import org.securesystem.insular.util.Permissions
 import eu.chainfire.libsuperuser.Shell
 import kotlinx.coroutines.*
 

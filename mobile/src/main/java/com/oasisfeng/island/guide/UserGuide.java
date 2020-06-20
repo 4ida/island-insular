@@ -11,7 +11,7 @@ import com.oasisfeng.android.base.Scopes;
 import com.oasisfeng.common.app.AppListProvider;
 import com.oasisfeng.island.data.IslandAppInfo;
 import com.oasisfeng.island.data.IslandAppListProvider;
-import com.oasisfeng.island.mobile.R;
+import org.securesystem.insular.R;
 import com.oasisfeng.island.model.AppListViewModel;
 import com.oasisfeng.island.model.AppListViewModel.Filter;
 import com.oasisfeng.island.model.AppViewModel;

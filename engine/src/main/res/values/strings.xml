@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="profile_name">Island</string>
+    <string name="profile_name">Insular</string>
 
-    <string name="permission_group_control_island_apps_label">Control Island apps</string>
-    <string name="permission_group_control_island_apps_description">control apps managed by Island</string>
-    <string name="permission_freeze_app_label">Freeze Island-managed apps</string>
-    <string name="permission_freeze_app_description">This app can freeze and unfreeze any app managed by Island at any time.</string>
-    <string name="permission_launch_app_label">Launch Island-managed apps</string>
-    <string name="permission_launch_app_description">This app can launch any app managed by Island, which will be unfrozen if needed.</string>
-    <string name="permission_suspend_app_label">Suspend Island-managed apps</string>
-    <string name="permission_suspend_app_description">This app can suspend and unsuspend any app managed by Island at any time.</string>
+    <string name="permission_group_control_island_apps_label">Control Insular apps</string>
+    <string name="permission_group_control_island_apps_description">control apps managed by Insular</string>
+    <string name="permission_freeze_app_label">Freeze Insular-managed apps</string>
+    <string name="permission_freeze_app_description">This app can freeze and unfreeze any app managed by Insular at any time.</string>
+    <string name="permission_launch_app_label">Launch Insular-managed apps</string>
+    <string name="permission_launch_app_description">This app can launch any app managed by Insular, which will be unfrozen if needed.</string>
+    <string name="permission_suspend_app_label">Suspend Insular-managed apps</string>
+    <string name="permission_suspend_app_description">This app can suspend and unsuspend any app managed by Insular at any time.</string>
 
-    <string name="notification_provisioning_island_title">Provisioning Island…</string>
+    <string name="notification_provisioning_island_title">Provisioning Insular…</string>
     <string name="notification_provisioning_mainland_title">Provisioning Mainland…</string>
     <string name="notification_provisioning_text">It may take several minutes.</string>
 
-    <string name="toast_shortcut_invalid">Shortcut is no longer valid, please check the status of Island or re-create it in Island</string>
-    <string name="toast_setup_complete">Island setup is complete.</string>
+    <string name="toast_shortcut_invalid">Shortcut is no longer valid, please check the status of Insular or re-create it in Insular</string>
+    <string name="toast_setup_complete">Insular setup is complete.</string>
     <string name="toast_reprovision_done">Done repairing.</string>
 </resources>
