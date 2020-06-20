@@ -29,7 +29,7 @@ import android.view.MenuItem
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import com.oasisfeng.island.appops.AppOpsCompat
-import com.oasisfeng.island.mobile.R
+import org.securesystem.insular.R
 import com.oasisfeng.island.notification.NotificationIds
 import com.oasisfeng.island.setup.IslandSetup
 import com.oasisfeng.island.shuttle.PendingIntentShuttle

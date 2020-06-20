@@ -18,7 +18,7 @@ import com.oasisfeng.android.util.Apps
 import com.oasisfeng.android.util.SafeAsyncTask
 import com.oasisfeng.island.appops.AppOpsHelper
 import com.oasisfeng.island.data.IslandAppInfo
-import com.oasisfeng.island.mobile.R
+import org.securesystem.insular.R
 import com.oasisfeng.island.util.Hacks
 
 @RequiresApi(P) class OpsManager(private val activity: Activity, private val permission: String, private val op: Int) {

@@ -29,7 +29,7 @@ import com.oasisfeng.android.app.Activities;
 import com.oasisfeng.android.base.SparseArray;
 import com.oasisfeng.android.ui.Dialogs;
 import com.oasisfeng.island.MainActivity;
-import com.oasisfeng.island.mobile.R;
+import org.securesystem.insular.R;
 import com.oasisfeng.island.shared.BuildConfig;
 import com.oasisfeng.island.shuttle.MethodShuttle;
 import com.oasisfeng.island.util.DevicePolicies;

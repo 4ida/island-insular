@@ -26,7 +26,7 @@ import com.oasisfeng.island.data.IslandAppInfo;
 import com.oasisfeng.island.engine.IslandManager;
 import com.oasisfeng.island.engine.common.WellKnownPackages;
 import com.oasisfeng.island.installer.InstallerExtras;
-import com.oasisfeng.island.mobile.R;
+import org.securesystem.insular.R;
 import com.oasisfeng.island.shuttle.MethodShuttle;
 import com.oasisfeng.island.util.DevicePolicies;
 import com.oasisfeng.island.util.OwnerUser;

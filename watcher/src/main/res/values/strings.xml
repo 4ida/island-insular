@@ -1,5 +1,5 @@
 <resources>
-    <string name="notification_island_watcher_title">Island space is active</string>
+    <string name="notification_island_watcher_title">Insular space is active</string>
     <string name="notification_island_watcher_text">Deactivate to cease all the background activities inside.</string>
     <string name="notification_app_watcher_title">%s is active</string>
     <string name="notification_app_watcher_text">Pending re-freeze</string>

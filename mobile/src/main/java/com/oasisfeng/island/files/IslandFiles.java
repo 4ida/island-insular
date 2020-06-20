@@ -9,7 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.RequiresPermission;
 
 import com.oasisfeng.island.analytics.Analytics;
-import com.oasisfeng.island.mobile.R;
+import org.securesystem.insular.R;
 import com.oasisfeng.island.shuttle.ContextShuttle;
 import com.oasisfeng.island.util.Modules;
 import com.oasisfeng.island.util.Permissions;

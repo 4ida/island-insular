@@ -49,7 +49,7 @@
                 android:paddingTop="16sp"
                 style="@style/containerText"
                 android:text="@string/dialog_manual_setup"
-                bind:shown="@{setup.action_extra == com.oasisfeng.island.mobile.R.string.button_instructions_online}"/>
+                bind:shown="@{setup.action_extra == org.securesystem.insular.R.string.button_instructions_online}"/>
 
             <Button
                 android:layout_width="wrap_content"

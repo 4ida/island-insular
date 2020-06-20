@@ -7,7 +7,7 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.widget.Toast
 import com.oasisfeng.android.widget.Toasts
-import com.oasisfeng.island.mobile.BuildConfig
+import org.securesystem.insular.BuildConfig
 import com.oasisfeng.island.shortcut.AbstractAppLaunchShortcut
 import com.oasisfeng.island.shuttle.MethodShuttle
 import com.oasisfeng.island.util.CallerAwareActivity

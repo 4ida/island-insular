@@ -41,7 +41,7 @@
             android:textIsSelectable="false"
             android:drawablePadding="16dp"
 
-            android:text="@{app.info.label}" tools:text="Island"
+            android:text="@{app.info.label}" tools:text="Insular"
             android:drawableStart="@{app.icon ?? @drawable/app_icon_empty}" tools:drawableStart="@mipmap/ic_launcher"
             android:drawableEnd="@{apps.mSelection == app &amp;&amp; app.info.launchable &amp;&amp; (app.state == State.Alive || app.state == State.Frozen) ? @drawable/ic_launch_24dp : null}"
             android:onViewAttachedToWindow="@{app::onViewAttached}"
