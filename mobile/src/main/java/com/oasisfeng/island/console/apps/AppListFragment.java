@@ -22,7 +22,6 @@ import com.oasisfeng.android.app.LifecycleViewModelFragment;
 import com.oasisfeng.android.os.Loopers;
 import com.oasisfeng.androidx.lifecycle.ViewModelProviders;
 import com.oasisfeng.common.app.AppListProvider;
-import com.oasisfeng.island.TempDebug;
 import com.oasisfeng.island.data.IslandAppInfo;
 import com.oasisfeng.island.data.IslandAppListProvider;
 import com.oasisfeng.island.featured.FeaturedListViewModel;
@@ -174,8 +173,7 @@ public class AppListFragment extends LifecycleViewModelFragment {
 		final int id = item.getItemId();
 		if (id == R.id.menu_filter) mViewModel.mChipsVisible.setValue(! mViewModel.mChipsVisible.getValue());
 		if (id == R.id.menu_settings) startActivity(new Intent(getActivity(), SettingsActivity.class));
-		else if (id == R.id.menu_test) TempDebug.run(getActivity());
-		else return super.onOptionsItemSelected(item);
+		else if (id != R.id.menu_test) return super.onOptionsItemSelected(item);
 		return true;
 	}
 
