@@ -27,7 +27,7 @@ import tools.fastlane.screengrab.locale.LocaleTestRule
 @LargeTest
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest {
-    @ClassRule
+    @Rule @JvmField
     val localeTestRule = LocaleTestRule()
 
     @Rule
@@ -164,14 +164,6 @@ class MainActivityTest {
                                 0)))
                 .atPosition(1)
         linearLayout2.perform(click())
-
-        val textView5 = onData(anything())
-                .inAdapterView(allOf(withClassName(`is`("com.android.internal.app.AlertController$RecycleListView")),
-                        childAtPosition(
-                                withClassName(`is`("android.widget.FrameLayout")),
-                                0)))
-                .atPosition(1)
-        textView5.perform(click())
     }
 
     private fun childAtPosition(
