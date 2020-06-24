@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="vm" type="com.oasisfeng.island.featured.FeaturedViewModel" />
+        <variable name="vm" type="org.securesystem.insular.featured.FeaturedViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView

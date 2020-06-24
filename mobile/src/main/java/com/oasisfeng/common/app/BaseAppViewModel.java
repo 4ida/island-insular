@@ -6,8 +6,8 @@ import android.view.View;
 
 import com.oasisfeng.android.ui.IconResizer;
 import com.oasisfeng.androidx.lifecycle.NonNullMutableLiveData;
-import com.oasisfeng.island.IslandApplication;
-import org.securesystem.insular.R;
+import org.securesystem.insular.IslandApplication;
+import org.securesystem.insular.mobile.R;
 
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.ViewModel;

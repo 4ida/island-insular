@@ -1,4 +1,4 @@
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" tools:context="com.oasisfeng.island.settings.SettingsActivity">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" tools:context="org.securesystem.insular.settings.SettingsActivity">
 
     <Preference android:key="@string/key_version" android:title="@string/pref_about_version_title" tools:summary="1.0 beta 1" />
 

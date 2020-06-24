@@ -1,4 +1,4 @@
-<manifest package="org.securesystem.insular" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" >
+<manifest package="org.securesystem.insular.mobile" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" >
 
     <uses-feature android:name="android.software.device_admin" android:required="true" />
     <uses-feature android:name="android.software.managed_users" android:required="true" />
@@ -23,7 +23,7 @@
         <!-- <meta-data android:name="com.google.android.actions" android:resource="@xml/actions" /> -->
 
         <!-- windowSoftInputMode="adjustPan" to avoid bottom-sheet hanging in the center of screen when search is finished and IME panel is closed. -->
-        <activity android:name="com.oasisfeng.island.MainActivity" android:windowSoftInputMode="adjustPan">
+        <activity android:name="org.securesystem.insular.MainActivity" android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -32,7 +32,7 @@
             <intent-filter android:priority="-1"> <!-- Used by IslandProvisioning to launch this activity from Insular after successful provisioning -->
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="com.oasisfeng.island.category.MAIN_ACTIVITY" />
+                <category android:name="org.securesystem.insular.category.MAIN_ACTIVITY" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -41,9 +41,9 @@
             <meta-data android:name="android.app.searchable" android:resource="@xml/searchable"/>
         </activity>
 
-        <activity android:name="com.oasisfeng.island.setup.SetupActivity" android:theme="@style/SetupTheme" />
+        <activity android:name="org.securesystem.insular.setup.SetupActivity" android:theme="@style/SetupTheme" />
 
-        <activity android:name="com.oasisfeng.island.action.FeatureActionActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"
+        <activity android:name="org.securesystem.insular.action.FeatureActionActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"
                   android:excludeFromRecents="true">
             <intent-filter> <!-- Deep-link for App Actions -->
                 <action android:name="android.intent.action.VIEW" />
@@ -54,42 +54,42 @@
         </activity>
 
         <provider android:authorities="${applicationId}.apps"
-                  android:name="com.oasisfeng.island.data.IslandAppListProvider"
+                  android:name="org.securesystem.insular.data.IslandAppListProvider"
                   android:exported="false"
                   android:multiprocess="true" />
 
-        <receiver android:name="com.oasisfeng.island.adb.ProfileRestrictionsSync" android:directBootAware="true" tools:targetApi="N">
+        <receiver android:name="org.securesystem.insular.adb.ProfileRestrictionsSync" android:directBootAware="true" tools:targetApi="N">
             <intent-filter>
                 <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
-        <receiver android:name="com.oasisfeng.island.settings.IslandSettingsActivity$Enabler"> <!-- Enable IslandSettingsActivity then disable self -->
+        <receiver android:name="org.securesystem.insular.settings.IslandSettingsActivity$Enabler"> <!-- Enable IslandSettingsActivity then disable self -->
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
         </receiver>
 
-        <activity android:name="com.oasisfeng.island.settings.SettingsActivity"
+        <activity android:name="org.securesystem.insular.settings.SettingsActivity"
                   android:label="@string/settings_title"
                   android:theme="@style/AppTheme.Settings"
-                  android:parentActivityName="com.oasisfeng.island.MainActivity" />
+                  android:parentActivityName="org.securesystem.insular.MainActivity" />
 
-        <activity android:name="com.oasisfeng.island.settings.IslandSettingsActivity"
+        <activity android:name="org.securesystem.insular.settings.IslandSettingsActivity"
                   android:label="@string/label_activity_island_settings"
                   android:theme="@style/AppTheme.Settings"
                   android:enabled="false"> <!-- Enabled explicitly for managed profiles during Insular setup -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="com.oasisfeng.island.category.ISLAND_ONLY" />
+                <category android:name="org.securesystem.insular.category.ISLAND_ONLY" />
             </intent-filter>
         </activity>
 
-        <activity-alias android:name="com.oasisfeng.island.settings.IslandSettingsActivityInMainland"
-                        android:targetActivity="com.oasisfeng.island.settings.IslandSettingsActivity" /> <!-- To avoid launcher icon in mainland -->
+        <activity-alias android:name="org.securesystem.insular.settings.IslandSettingsActivityInMainland"
+                        android:targetActivity="org.securesystem.insular.settings.IslandSettingsActivity" /> <!-- To avoid launcher icon in mainland -->
 
     </application>
 

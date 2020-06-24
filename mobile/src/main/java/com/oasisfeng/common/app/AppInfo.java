@@ -16,7 +16,7 @@ import androidx.annotation.UiThread;
 
 import com.oasisfeng.android.util.Supplier;
 import com.oasisfeng.android.util.Suppliers;
-import com.oasisfeng.island.analytics.Analytics;
+import org.securesystem.insular.analytics.Analytics;
 
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.RejectedExecutionException;

@@ -1,13 +1,13 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.oasisfeng.island.engine.test">
-    <uses-permission android:name="com.oasisfeng.island.permission.FREEZE_PACKAGE" />
-    <uses-permission android:name="com.oasisfeng.island.permission.LAUNCH_PACKAGE" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="org.securesystem.insular.engine.test">
+    <uses-permission android:name="org.securesystem.insular.permission.FREEZE_PACKAGE" />
+    <uses-permission android:name="org.securesystem.insular.permission.LAUNCH_PACKAGE" />
     <application>
-        <activity android:name="com.oasisfeng.island.api.ApiActivityTest$DummyActivity">
+        <activity android:name="org.securesystem.insular.api.ApiActivityTest$DummyActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <provider android:authorities="${applicationId}.AIP" android:name="com.oasisfeng.island.provisioning.AutoIncrementalProvision" android:enabled="false"/>
+        <provider android:authorities="${applicationId}.AIP" android:name="org.securesystem.insular.provisioning.AutoIncrementalProvision" android:enabled="false"/>
     </application>
 </manifest>

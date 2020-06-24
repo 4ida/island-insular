@@ -1,10 +1,10 @@
-<manifest package="com.oasisfeng.island.watcher" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+<manifest package="org.securesystem.insular.watcher" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" /> <!-- IslandWatcher -->
 
     <application tools:ignore="AllowBackup,GoogleAppIndexingWarning,MissingApplicationIcon">
 
-        <receiver android:name=".IslandWatcher" android:enabled="@bool/since_api_28">
+        <receiver android:name="org.securesystem.insular.watcher.IslandWatcher" android:enabled="@bool/since_api_28">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
@@ -12,21 +12,21 @@
                 <action android:name="android.app.action.APP_BLOCK_STATE_CHANGED" />
             </intent-filter>
         </receiver>
-        <service android:name=".IslandWatcher$IslandDeactivationService" />
+        <service android:name="org.securesystem.insular.watcher.IslandWatcher$IslandDeactivationService" />
 
-        <receiver android:name=".IslandAppWatcher"
+        <receiver android:name="org.securesystem.insular.watcher.IslandAppWatcher"
                   android:enabled="@bool/since_api_26">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_FULLY_REMOVED" />
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
-        <provider android:name=".IslandAppWatcher$AppStateTracker"
-                  android:authorities="com.oasisfeng.island.watcher"
+        <provider android:name="org.securesystem.insular.watcher.IslandAppWatcher$AppStateTracker"
+                  android:authorities="org.securesystem.insular.watcher"
                   android:exported="false"
                   android:enabled="@bool/since_api_26" />
 
-        <activity android:name=".IslandWatcher$DummyHomeActivity"
+        <activity android:name="org.securesystem.insular.watcher.IslandWatcher$DummyHomeActivity"
                   android:theme="@android:style/Theme.NoDisplay"
                   android:hardwareAccelerated="false"
                   android:enabled="false">
