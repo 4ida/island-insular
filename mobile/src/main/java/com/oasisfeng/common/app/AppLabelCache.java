@@ -13,7 +13,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.oasisfeng.island.util.Hacks;
+import org.securesystem.insular.util.Hacks;
 
 import java.util.Objects;
 

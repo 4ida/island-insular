@@ -7,9 +7,9 @@
 
     <data>
         <import type="android.view.View" />
-        <import type="com.oasisfeng.island.util.TextFormat" />
+        <import type="org.securesystem.insular.util.TextFormat" />
         <import type="android.text.SpannedString" />
-        <variable name="setup" type="com.oasisfeng.island.setup.SetupViewModel" />
+        <variable name="setup" type="org.securesystem.insular.setup.SetupViewModel" />
     </data>
 
     <com.android.setupwizardlib.SetupWizardLayout
@@ -49,7 +49,7 @@
                 android:paddingTop="16sp"
                 style="@style/containerText"
                 android:text="@string/dialog_manual_setup"
-                bind:shown="@{setup.action_extra == org.securesystem.insular.R.string.button_instructions_online}"/>
+                bind:shown="@{setup.action_extra == org.securesystem.insular.mobile.R.string.button_instructions_online}"/>
 
             <Button
                 android:layout_width="wrap_content"

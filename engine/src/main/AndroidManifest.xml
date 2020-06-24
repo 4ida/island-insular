@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
-          package="com.oasisfeng.island.engine" android:installLocation="internalOnly">
+          package="org.securesystem.insular.engine" android:installLocation="internalOnly">
 
     <uses-feature android:name="android.software.device_admin" android:required="true" />
     <uses-feature android:name="android.software.managed_users" android:required="true" />
@@ -10,19 +10,19 @@
                       android:icon="@drawable/ic_landscape_black_24dp" />
 
     <permission android:name="${applicationId}.permission.FREEZE_PACKAGE"
-                android:permissionGroup="com.oasisfeng.island.permission-group.PACKAGE_ACCESS"
+                android:permissionGroup="org.securesystem.insular.permission-group.PACKAGE_ACCESS"
                 android:protectionLevel="dangerous"
                 android:label="@string/permission_freeze_app_label"
                 android:description="@string/permission_freeze_app_description" />
 
     <permission android:name="${applicationId}.permission.LAUNCH_PACKAGE"
-                android:permissionGroup="com.oasisfeng.island.permission-group.PACKAGE_ACCESS"
+                android:permissionGroup="org.securesystem.insular.permission-group.PACKAGE_ACCESS"
                 android:protectionLevel="dangerous"
                 android:label="@string/permission_launch_app_label"
                 android:description="@string/permission_launch_app_description" />
 
     <permission android:name="${applicationId}.permission.SUSPEND_PACKAGE"
-                android:permissionGroup="com.oasisfeng.island.permission-group.PACKAGE_ACCESS"
+                android:permissionGroup="org.securesystem.insular.permission-group.PACKAGE_ACCESS"
                 android:protectionLevel="dangerous"
                 android:label="@string/permission_suspend_app_label"
                 android:description="@string/permission_suspend_app_description" />
@@ -40,7 +40,7 @@
 
     <application android:label="Insular - Engine" tools:ignore="AllowBackup,GoogleAppIndexingWarning,MissingApplicationIcon">
 
-        <activity android:name="com.oasisfeng.island.shortcut.AppLaunchShortcut"
+        <activity android:name="org.securesystem.insular.shortcut.AppLaunchShortcut"
                   android:hardwareAccelerated="false"
                   android:resumeWhilePausing="true"
                   android:excludeFromRecents="true"
@@ -49,14 +49,14 @@
                   android:taskAffinity=":shortcut"
                   android:launchMode="singleTask" > <!-- Most important attribute: launchMode="singleTask" -->
             <intent-filter android:priority="-1"> <!-- Negative priority cause intent matching preferably in profile -->
-                <action android:name="com.oasisfeng.island.action.LAUNCH_CLONE" />
+                <action android:name="org.securesystem.insular.action.LAUNCH_CLONE" />
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="target" />
                 <data android:scheme="package" />
             </intent-filter>
             <intent-filter>
-                <action android:name="com.oasisfeng.island.action.LAUNCH_APP" />
+                <action android:name="org.securesystem.insular.action.LAUNCH_APP" />
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="target" />
@@ -64,7 +64,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.oasisfeng.island.api.ApiActivity"
+        <activity android:name="org.securesystem.insular.api.ApiActivity"
                   android:hardwareAccelerated="false"
                   android:resumeWhilePausing="true"
                   android:excludeFromRecents="true"
@@ -72,24 +72,24 @@
                   android:taskAffinity=":api"
                   android:theme="@android:style/Theme.Translucent.NoTitleBar" >
             <intent-filter>
-                <action android:name="com.oasisfeng.island.action.FREEZE" />
-                <action android:name="com.oasisfeng.island.action.UNFREEZE" />
-                <action android:name="com.oasisfeng.island.action.LAUNCH" />
-                <action android:name="com.oasisfeng.island.action.SUSPEND" />
-                <action android:name="com.oasisfeng.island.action.UNSUSPEND" />
+                <action android:name="org.securesystem.insular.action.FREEZE" />
+                <action android:name="org.securesystem.insular.action.UNFREEZE" />
+                <action android:name="org.securesystem.insular.action.LAUNCH" />
+                <action android:name="org.securesystem.insular.action.SUSPEND" />
+                <action android:name="org.securesystem.insular.action.UNSUSPEND" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="package" />
                 <data android:scheme="packages" /> <!-- ssp: comma-separated package names -->
             </intent-filter>
         </activity>
 
-        <receiver android:name="com.oasisfeng.island.api.ApiReceiver">
+        <receiver android:name="org.securesystem.insular.api.ApiReceiver">
             <intent-filter>
-                <action android:name="com.oasisfeng.island.action.FREEZE" />
-                <action android:name="com.oasisfeng.island.action.UNFREEZE" />
-                <action android:name="com.oasisfeng.island.action.LAUNCH" />
-                <action android:name="com.oasisfeng.island.action.SUSPEND" />
-                <action android:name="com.oasisfeng.island.action.UNSUSPEND" />
+                <action android:name="org.securesystem.insular.action.FREEZE" />
+                <action android:name="org.securesystem.insular.action.UNFREEZE" />
+                <action android:name="org.securesystem.insular.action.LAUNCH" />
+                <action android:name="org.securesystem.insular.action.SUSPEND" />
+                <action android:name="org.securesystem.insular.action.UNSUSPEND" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="package" />
                 <data android:scheme="packages" /> <!-- ssp: comma-separated package names -->
@@ -97,7 +97,7 @@
         </receiver>
 
         <!-- ServiceShuttleActivity (non-exported) -->
-        <activity android:name="com.oasisfeng.island.InternalActivity$_1"
+        <activity android:name="org.securesystem.insular.InternalActivity$_1"
                   android:exported="false"
                   android:hardwareAccelerated="false"
                   android:resumeWhilePausing="true"
@@ -105,32 +105,32 @@
                   android:theme="@android:style/Theme.NoDisplay"
                   android:taskAffinity=":shuttle" >
             <intent-filter>
-                <action android:name="com.oasisfeng.island.action.BIND_SERVICE" />
+                <action android:name="org.securesystem.insular.action.BIND_SERVICE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <service android:name="com.oasisfeng.island.service.IslandPersistentService"
+        <service android:name="org.securesystem.insular.service.IslandPersistentService"
                  android:permission="android.permission.BIND_DEVICE_ADMIN">
             <intent-filter>
                 <action android:name="android.app.action.DEVICE_ADMIN_SERVICE" />
             </intent-filter>
         </service>
 
-        <service android:name="com.oasisfeng.island.shuttle.MethodShuttle$MethodShuttleService" android:exported="false">
+        <service android:name="org.securesystem.insular.shuttle.MethodShuttle$MethodShuttleService" android:exported="false">
             <intent-filter android:priority="-1">
-                <action android:name="com.oasisfeng.island.shuttle.IMethodShuttle" />
+                <action android:name="org.securesystem.insular.shuttle.IMethodShuttle" />
             </intent-filter>
         </service>
 
-        <service android:name="com.oasisfeng.island.provisioning.IslandProvisioning" android:exported="false"
+        <service android:name="org.securesystem.insular.provisioning.IslandProvisioning" android:exported="false"
                  android:directBootAware="true" tools:targetApi="N">
             <intent-filter>
                 <action android:name="android.app.action.PROVISION_MANAGED_PROFILE" />
                 <action android:name="android.app.action.PROVISION_MANAGED_DEVICE" />
             </intent-filter>
         </service>
-        <activity android:name="com.oasisfeng.island.provisioning.IslandProvisioning$CompletionActivity"
+        <activity android:name="org.securesystem.insular.provisioning.IslandProvisioning$CompletionActivity"
                   android:permission="android.permission.BIND_DEVICE_ADMIN"
                   android:theme="@android:style/Theme.Translucent.NoTitleBar"
                   android:excludeFromRecents="true" android:directBootAware="true" tools:targetApi="N">
@@ -140,7 +140,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name="com.oasisfeng.island.IslandDeviceAdminReceiver"
+        <receiver android:name="org.securesystem.insular.IslandDeviceAdminReceiver"
                   android:permission="android.permission.BIND_DEVICE_ADMIN" >
             <meta-data android:name="android.app.device_admin" android:resource="@xml/device_admin" />
             <intent-filter>
@@ -149,22 +149,22 @@
             </intent-filter>
         </receiver>
 
-        <receiver android:name="com.oasisfeng.island.provisioning.ManualProvisioningReceiver" android:exported="false" android:directBootAware="true" tools:targetApi="N">
+        <receiver android:name="org.securesystem.insular.provisioning.ManualProvisioningReceiver" android:exported="false" android:directBootAware="true" tools:targetApi="N">
             <intent-filter android:priority="9999"> <!-- High priority to ensure being executed as early as possible -->
                 <action android:name="android.intent.action.USER_INITIALIZE" />
                 <action android:name="android.app.action.DEVICE_OWNER_CHANGED" />
             </intent-filter>
         </receiver>
 
-        <provider android:name="com.oasisfeng.island.provisioning.AutoIncrementalProvision" android:authorities="${applicationId}.AIP" android:exported="false"/>
+        <provider android:name="org.securesystem.insular.provisioning.AutoIncrementalProvision" android:authorities="${applicationId}.AIP" android:exported="false"/>
 
-        <receiver android:name="com.oasisfeng.island.AppUpdateReceiver" android:exported="false" android:directBootAware="true" tools:targetApi="N">
+        <receiver android:name="org.securesystem.insular.AppUpdateReceiver" android:exported="false" android:directBootAware="true" tools:targetApi="N">
             <intent-filter>
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
         </receiver>
 
-        <receiver android:name="com.oasisfeng.island.shuttle.ShortcutShuttle" tools:ignore="ExportedReceiver"> <!-- Exported without permission requirement, for wider compatibility -->
+        <receiver android:name="org.securesystem.insular.shuttle.ShortcutShuttle" tools:ignore="ExportedReceiver"> <!-- Exported without permission requirement, for wider compatibility -->
             <intent-filter>
                 <action android:name="com.android.launcher.action.INSTALL_SHORTCUT" />
             </intent-filter>

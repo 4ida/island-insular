@@ -1,11 +1,11 @@
 <manifest xmlns:tools="http://schemas.android.com/tools"
-          package="com.oasisfeng.island.installer" xmlns:android="http://schemas.android.com/apk/res/android">
+          package="org.securesystem.insular.installer" xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application tools:ignore="AllowBackup,GoogleAppIndexingWarning,MissingApplicationIcon" android:taskAffinity="">
 
-        <activity android:name=".AppInstallerActivity"
+        <activity android:name="org.securesystem.insular.installer.AppInstallerActivity"
                   android:label="@string/app_installer_label"
                   android:configChanges="uiMode|orientation|screenSize|keyboard|keyboardHidden"
                   android:excludeFromRecents="true"
@@ -21,14 +21,14 @@
             <intent-filter> <!-- without MIME type -->
                 <action android:name="android.intent.action.INSTALL_PACKAGE" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="com.oasisfeng.island" />
+                <category android:name="org.securesystem.insular" />
                 <data android:scheme="file" />
                 <data android:scheme="package" />
                 <data android:scheme="content" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".AppInfoForwarderActivity"
+        <activity android:name="org.securesystem.insular.installer.AppInfoForwarderActivity"
                   android:taskAffinity=""
                   android:excludeFromRecents="true"
                   android:relinquishTaskIdentity="true"
@@ -39,9 +39,9 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".AppSettingsHelperService" android:exported="false" android:label="App Settings Helper">
+        <service android:name="org.securesystem.insular.installer.AppSettingsHelperService" android:exported="false" android:label="App Settings Helper">
             <intent-filter>
-                <action android:name="com.oasisfeng.island.PersistentService" />
+                <action android:name="org.securesystem.insular.PersistentService" />
             </intent-filter>
         </service>
 

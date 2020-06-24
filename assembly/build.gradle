@@ -4,7 +4,7 @@ android {
     compileSdkVersion this.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.oasisfeng.island"
+        applicationId "org.securesystem.insular"
         minSdkVersion 21
         targetSdkVersion 28     // Private APIs are accessed by module "open" and "fileprovider" (via indirectly loaded remote class)
         resConfigs "en", "zh"

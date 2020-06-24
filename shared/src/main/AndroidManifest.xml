@@ -1,4 +1,4 @@
-<manifest package="com.oasisfeng.island.shared" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+<manifest package="org.securesystem.insular.shared" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -6,19 +6,19 @@
     <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS" tools:ignore="ProtectedPermissions" /> <!-- AbstractAppLaunchShortcut -->
     <uses-permission android:name="android.permission.GET_APP_OPS_STATS" tools:ignore="ProtectedPermissions" /> <!-- AppOpsCompat -->
 
-    <application android:name="com.oasisfeng.island.IslandApplication" tools:ignore="AllowBackup,GoogleAppIndexingWarning,MissingApplicationIcon">
+    <application android:name="org.securesystem.insular.IslandApplication" tools:ignore="AllowBackup,GoogleAppIndexingWarning,MissingApplicationIcon">
 
         <!-- Users -->
-        <provider android:name="com.oasisfeng.island.InternalContentProviders$_1"
+        <provider android:name="org.securesystem.insular.InternalContentProviders$_1"
                   android:initOrder="1000"
                   android:authorities="${applicationId}.internal.1"
                   android:directBootAware="true" tools:targetApi="N"
                   android:exported="false" />
 
-        <receiver android:name="com.oasisfeng.island.shuttle.PendingIntentShuttle" />
-        <service android:name="com.oasisfeng.island.shuttle.PendingIntentShuttle$StarterService" android:exported="false">
+        <receiver android:name="org.securesystem.insular.shuttle.PendingIntentShuttle" />
+        <service android:name="org.securesystem.insular.shuttle.PendingIntentShuttle$StarterService" android:exported="false">
             <intent-filter>
-                <action android:name="com.oasisfeng.island.PersistentService" />
+                <action android:name="org.securesystem.insular.PersistentService" />
             </intent-filter>
         </service>
     </application>

@@ -3,7 +3,7 @@ package com.oasisfeng.ui.card;
 import android.content.Context;
 import android.view.View;
 
-import org.securesystem.insular.R;
+import org.securesystem.insular.mobile.R;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.StringRes;

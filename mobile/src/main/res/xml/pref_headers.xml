@@ -1,19 +1,19 @@
 <preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
 
     <header
-        android:fragment="com.oasisfeng.island.settings.GeneralPreferenceFragment"
+        android:fragment="org.securesystem.insular.settings.GeneralPreferenceFragment"
         android:icon="@drawable/ic_settings_black_24dp"
         android:title="@string/pref_general_header" />
 
     <header
         android:id="@+id/pref_header_island"
-        android:fragment="com.oasisfeng.island.settings.IslandSettingsFragment"
+        android:fragment="org.securesystem.insular.settings.IslandSettingsFragment"
         android:icon="@drawable/ic_landscape_black_24dp"
         android:title="@string/pref_scoped_settings_header"
         android:breadCrumbTitle="@string/tab_mainland" /> <!-- "breadCrumbTitle" is only used for mainland -->
 
     <header
-        android:fragment="com.oasisfeng.island.settings.SettingsActivity$AboutFragment"
+        android:fragment="org.securesystem.insular.settings.SettingsActivity$AboutFragment"
         android:icon="@drawable/ic_info_black_24dp"
         android:title="@string/pref_about_header" />
 

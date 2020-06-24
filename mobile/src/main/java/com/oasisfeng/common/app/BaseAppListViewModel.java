@@ -3,7 +3,7 @@ package com.oasisfeng.common.app;
 import android.util.Log;
 
 import com.oasisfeng.android.databinding.ObservableSortedList;
-import com.oasisfeng.island.model.AppViewModel;
+import org.securesystem.insular.model.AppViewModel;
 
 import java.util.HashMap;
 import java.util.List;
