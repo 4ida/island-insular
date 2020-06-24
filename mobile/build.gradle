@@ -26,7 +26,8 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.aar'])
+//    implementation fileTree(dir: 'libs', include: ['*.aar'])
+    implementation project(':setup-wizard-lib-platform-release')
     implementation project(':shared')
     implementation project(':deagle')
     implementation project(':biometric')
@@ -49,4 +50,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0-rc01'
     androidTestImplementation 'androidx.test:rules:1.3.0-rc01'
     androidTestImplementation 'tools.fastlane:screengrab:1.0.0'
+    androidTestImplementation 'androidx.test:core:1.2.0'
 }

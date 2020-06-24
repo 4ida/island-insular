@@ -6,6 +6,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES.N
+import android.os.Build.VERSION_CODES.P
 import android.os.Bundle
 import android.preference.TwoStatePreference
 import com.oasisfeng.android.ui.Dialogs
