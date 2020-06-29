@@ -1,2 +1,1 @@
 configurations.maybeCreate("default")
-artifacts.add("default", file('setup-wizard-lib-platform-release.aar'))
