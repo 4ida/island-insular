@@ -1,7 +1,7 @@
-What is "Island"
------------------
+What is "Insular"
+----------------
 
-"Island" is a sandbox environment to clone selected apps and isolate them from accessing your personal data outside the sandbox (including call logs, contacts, photos and etc) even if related permissions are granted. Device-bound data (SMS, IMEI and etc) is still accessible.
+"Insular" is a sandbox environment to clone selected apps and isolate them from accessing your personal data outside the sandbox (including call logs, contacts, photos and etc) even if related permissions are granted. Device-bound data (SMS, IMEI and etc) is still accessible.
 
 Isolated app can be frozen on demand, with launcher icon vanish and its background behaviors completely blocked.
 
@@ -9,9 +9,9 @@ Isolated app can be frozen on demand, with launcher icon vanish and its backgrou
 How does it work
 -----------------
 
-Island takes advantage of the "managed profile" feature on Android 5.0+, which is also the base of "Android for Work", to create an isolated sandbox for apps with their data.
+Insular takes advantage of the "managed profile" feature on Android 5.0+, which is also the base of "Android for Work", to create an isolated sandbox for apps with their data.
 
-App needs to be cloned in Island first. Afterwards, the clone can run parallel aside from the original one. (even with different accounts signed-in) It can be frozen on demand by Island. **(NO ROOT REQUIRED)**
+App needs to be cloned in Insular first. Afterwards, the clone can run parallel aside from the original one. (even with different accounts signed-in) It can be frozen on demand by Insular. **(NO ROOT REQUIRED)**
 
 If [Greenify](https://play.google.com/store/apps/details?id=com.oasisfeng.greenify) is also installed, apps can be frozen automatically by "Auto-freeze with Greenify" action (in the overflow menu), just like normal app hibernation in Greenify.
 
@@ -29,7 +29,7 @@ Common use cases
 Manual setup
 -------------
 
-On most middle to high end Android devices released after 2016, Island can be setup straightforward without hassle. But still on some devices, you may got "incompatible with your device" message on Google Play Store, or be notified during the setup with error message "Sorry, your device (or ROM) is incompatible with Island". In both cases, Island could still work on your device if setup manually.
+On most middle to high end Android devices released after 2016, Insular can be setup straightforward without hassle. But still on some devices, you may got "incompatible with your device" message on Google Play Store, or be notified during the setup with error message "Sorry, your device (or ROM) is incompatible with Insular". In both cases, Insular could still work on your device if setup manually.
 
 If you are prompted to encrypt your device first during the setup and you don't want device decription (which may significantly degrade overall I/O performance on low-end devices), this prerequisite could also be skipped if setup manually.
 
