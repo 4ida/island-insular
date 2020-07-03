@@ -31,11 +31,6 @@ Submit a new Beta Build to Crashlytics Beta
 fastlane android screenshots
 ```
 Build debug and test APK for screenshots
-### android increment_build_number
-```
-fastlane android increment_build_number
-```
-
 ### android deploy
 ```
 fastlane android deploy
