@@ -84,7 +84,7 @@ publishInternal:
   dependencies: []
   before_script:
     - mv $google_play_service_account_api_key_json ~/.google-play.json
-  
+    - "export VERSION_CODE=$CI_PIPELINE_IID && echo $VERSION_CODE"
     # Install fastlane etc.
     - bundle install
   after_script:
@@ -94,13 +94,13 @@ promoteAlpha:
   extends: .promote_job
   stage: alpha
   script:
-    - bundle exec fastlane promote_internal_to_alpha
+    - bundle exec fastlane promote_internal_to_alpha version_code:$VERSION_CODE
 
 promoteBeta:
   extends: .promote_job
   stage: beta
   script:
-    - bundle exec fastlane promote_alpha_to_beta
+    - bundle exec fastlane promote_alpha_to_beta version_code:$VERSION_CODE
 
 promoteProduction:
   extends: .promote_job
@@ -110,4 +110,4 @@ promoteProduction:
   only:
     - master
   script:
-    - bundle exec fastlane promote_beta_to_production
+    - bundle exec fastlane promote_beta_to_production version_code:$VERSION_CODE
