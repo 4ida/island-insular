@@ -1,0 +1,113 @@
+include:
+  - "https://gitlab.com/accessable-net/gitlab-ci-templates/-/raw/master/scheduled_rebase.yml"
+
+.checkout-deagle: &checkout_deagle
+  - git clone https://github.com/oasisfeng/deagle ../deagle -b dev
+
+.checkout-setupwizard: &checkout_setupwizard
+  - git clone https://android.googlesource.com/platform/frameworks/opt/setupwizard ../setup-wizard
+
+variables:
+  UPSTREAM_BRANCH: dev
+
+stages:
+  - environment
+  - build
+  - test
+  - deploy
+  - internal
+  - alpha
+  - beta
+  - production
+
+.build_job:
+  image: circleci/android:api-29
+  stage: build
+  before_script:
+    - base64 -d $KEYSTORE_FILE > android-signing-keystore.jks
+    - "export VERSION_CODE=$CI_PIPELINE_IID && echo $VERSION_CODE"
+    - "export VERSION_SHA=`echo ${CI_COMMIT_SHA:0:8}` && echo $VERSION_SHA"
+    # Prepare dependencies
+    - bundle install
+    - *checkout_deagle
+    - *checkout_setupwizard
+  after_script:
+    - rm -f android-signing-keystore.jks || true
+  artifacts:
+    paths:
+      - assembly/build/outputs
+
+buildDebug:
+  extends: .build_job
+  script:
+    - bundle exec fastlane buildDebug
+
+buildRelease:
+  extends: .build_job
+  script:
+    - bundle exec fastlane buildRelease
+  environment:
+    name: production
+
+testDebug:
+  image: circleci/android:api-29
+  stage: test
+  dependencies:
+    - buildDebug
+  before_script:
+    # Prepare dependencies
+    - bundle install
+    - *checkout_deagle
+    - *checkout_setupwizard
+  script:
+    - bundle exec fastlane test
+
+publishInternal:
+  image: circleci/android:api-29
+  stage: internal
+  dependencies:
+    - buildRelease
+  when: manual
+  before_script:
+    - mv $google_play_service_account_api_key_json ~/.google-play.json
+
+    # Install fastlane etc.
+    - bundle install
+  after_script:
+    - rm ~/.google-play.json
+  script:
+    - bundle exec fastlane internal
+
+.promote_job:
+  image: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  when: manual
+  dependencies: []
+  before_script:
+    - mv $google_play_service_account_api_key_json ~/.google-play.json
+    - "export VERSION_CODE=$CI_PIPELINE_IID && echo $VERSION_CODE"
+    # Install fastlane etc.
+    - bundle install
+  after_script:
+    - rm ~/google-play.json
+
+promoteAlpha:
+  extends: .promote_job
+  stage: alpha
+  script:
+    - bundle exec fastlane promote_internal_to_alpha version_code:$VERSION_CODE
+
+promoteBeta:
+  extends: .promote_job
+  stage: beta
+  script:
+    - bundle exec fastlane promote_alpha_to_beta version_code:$VERSION_CODE
+
+promoteProduction:
+  extends: .promote_job
+  stage: production
+  # We only allow production promotion on `master` because
+  # it has its own production scoped secret variables
+  only:
+    - master
+  script:
+    - bundle exec fastlane promote_beta_to_production version_code:$VERSION_CODE
