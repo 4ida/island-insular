@@ -10,7 +10,7 @@ android {
     }
 
     buildTypes {
-        release { buildConfigField("boolean", "CRASHLYTICS_ENABLED", "true") }
+        release { buildConfigField("boolean", "CRASHLYTICS_ENABLED", "false") }
         debug   { buildConfigField("boolean", "CRASHLYTICS_ENABLED", "false") }
     }
 
