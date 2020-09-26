@@ -37,15 +37,11 @@ stages:
     paths:
       - assembly/build/outputs
 
-buildReleaseApk:
-  extends: .build_job
-  script:
-    - bundle exec fastlane buildReleaseApk
-
 buildRelease:
   extends: .build_job
   script:
     - bundle exec fastlane buildRelease
+    - bundle exec fastlane buildReleaseApk
   environment:
     name: production
 
