@@ -37,10 +37,10 @@ stages:
     paths:
       - assembly/build/outputs
 
-buildDebug:
+buildReleaseApk:
   extends: .build_job
   script:
-    - bundle exec fastlane buildDebug
+    - bundle exec fastlane buildReleaseApk
 
 buildRelease:
   extends: .build_job
@@ -52,8 +52,6 @@ buildRelease:
 testDebug:
   image: circleci/android:api-29
   stage: test
-  dependencies:
-    - buildDebug
   before_script:
     # Prepare dependencies
     - bundle install

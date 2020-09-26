@@ -21,9 +21,9 @@ platform :android do
     gradle(task: "test")
   end
 
-  desc "Build for debugging"
-  lane :buildDebug do
-    gradle(task: "bundle", flavor: "complete", build_type: "Debug")
+  desc "Build apk for release"
+  lane :buildReleaseApk do
+    gradle(task: "assemble", flavor: "complete", build_type: "Release")
   end
 
   desc "Build for release"
