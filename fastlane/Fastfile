@@ -24,9 +24,7 @@ platform :android do
   desc "Build for release"
   lane :buildRelease do
     gradle(
-      tasks: ["bundle", "assemble"],
-      flavor: "complete",
-      build_type: "Release", 
+      tasks: ["bundleCompleteRelease", "assembleCompleteRelease"],
       print_command: false,
       properties: {
         "android.injected.signing.store.file" => ENV["KEYSTORE_FILE"],
