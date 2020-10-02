@@ -28,7 +28,8 @@ stages:
     - "export VERSION_CODE=$CI_PIPELINE_IID && echo $VERSION_CODE"
     - "export VERSION_SHA=`echo ${CI_COMMIT_SHA:0:8}` && echo $VERSION_SHA"
     # Prepare dependencies
-    - bundle install
+    - bundle config set path 'vendor/ruby'
+    - bundle install -j $(nproc)
     - *checkout_deagle
     - *checkout_setupwizard
   after_script:
@@ -36,6 +37,11 @@ stages:
   artifacts:
     paths:
       - assembly/build/outputs
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - vendor/ruby
+      - .gradle
 
 buildRelease:
   extends: .build_job
