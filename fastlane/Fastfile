@@ -21,14 +21,20 @@ platform :android do
     gradle(task: "test")
   end
 
-  desc "Build apk for release"
-  lane :buildReleaseApk do
-    gradle(task: "assemble", flavor: "complete", build_type: "Release")
-  end
-
   desc "Build for release"
   lane :buildRelease do
-    gradle(task: "bundle", flavor: "complete", build_type: "Release")
+    gradle(
+      tasks: ["bundle", "assemble"],
+      flavor: "complete",
+      build_type: "Release", 
+      print_command: false,
+      properties: {
+        "android.injected.signing.store.file" => ENV["KEYSTORE_FILE"],
+        "android.injected.signing.store.password" => ENV["KEYSTORE_PASSWORD"],
+        "android.injected.signing.key.alias" => ENV["KEY_ALIAS"],
+        "android.injected.signing.key.password" => ENV["KEY_PASSWORD"],
+      }
+    )
   end
 
   desc "Submit a new Internal Build to Play Store"

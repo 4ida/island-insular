@@ -41,7 +41,6 @@ buildRelease:
   extends: .build_job
   script:
     - bundle exec fastlane buildRelease
-    - bundle exec fastlane buildReleaseApk
   environment:
     name: production
 
