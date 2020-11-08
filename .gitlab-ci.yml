@@ -21,7 +21,7 @@ stages:
   - production
 
 .build_job:
-  image: circleci/android:api-29
+  image: circleci/android:api-30
   stage: build
   before_script:
     - base64 -d $KEYSTORE_FILE > android-signing-keystore.jks
@@ -51,7 +51,7 @@ buildRelease:
     name: production
 
 testDebug:
-  image: circleci/android:api-29
+  image: circleci/android:api-30
   stage: test
   before_script:
     # Prepare dependencies
@@ -62,7 +62,7 @@ testDebug:
     - bundle exec fastlane test
 
 publishInternal:
-  image: circleci/android:api-29
+  image: circleci/android:api-30
   stage: internal
   dependencies:
     - buildRelease
