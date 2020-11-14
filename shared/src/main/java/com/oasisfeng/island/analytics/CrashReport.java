@@ -4,7 +4,6 @@ import android.os.Process;
 
 import androidx.annotation.NonNull;
 
-import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.oasisfeng.android.util.Suppliers;
 
 import java.util.function.Supplier;
@@ -17,18 +16,11 @@ import java.util.function.Supplier;
  */
 public abstract class CrashReport {
 
-	static void logException(final Throwable t) { sSingleton.get().recordException(t); }
-	static void log(final String message) { sSingleton.get().log(message); }
-	static void setProperty(final String key, final String value) { sSingleton.get().setCustomKey(key, value); }
-	static void setProperty(final String key, final int value) { sSingleton.get().setCustomKey(key, value); }
-	static void setProperty(final String key, final boolean value) { sSingleton.get().setCustomKey(key, value); }
-
-	private static final Supplier<FirebaseCrashlytics> sSingleton = Suppliers.memoize(() -> {
-		final FirebaseCrashlytics crashlytics = FirebaseCrashlytics.getInstance();
-		crashlytics.setCrashlyticsCollectionEnabled(true/*BuildConfig.CRASHLYTICS_ENABLED*/);
-		crashlytics.setCustomKey("user", Process.myUserHandle().hashCode());			// Attach the current (Android) user ID to crash report.
-		return crashlytics;
-	});
+	static void logException(final Throwable t) { }
+	static void log(final String message) {}
+	static void setProperty(final String key, final String value) {  }
+	static void setProperty(final String key, final int value) { }
+	static void setProperty(final String key, final boolean value) { }
 
 	public static void initCrashHandler() {
 		final Thread.UncaughtExceptionHandler current_exception_handler = Thread.getDefaultUncaughtExceptionHandler();
@@ -44,8 +36,6 @@ public abstract class CrashReport {
 				return;
 			}
 			mHandlingUncaughtException = true;
-
-			sSingleton.get();	// Initialize if not yet
 
 			final Thread.UncaughtExceptionHandler handler = thread.getUncaughtExceptionHandler();
 			if (handler != null) handler.uncaughtException(thread, e);	// May re-enter this method if delegate is initialized above.
