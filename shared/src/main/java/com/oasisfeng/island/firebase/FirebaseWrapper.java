@@ -7,9 +7,6 @@ import android.content.Context;
 import android.os.PowerManager;
 import android.util.Log;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.firebase.FirebaseApp;
 import com.oasisfeng.condom.CondomContext;
 import com.oasisfeng.condom.CondomKit;
 import com.oasisfeng.condom.CondomOptions;
