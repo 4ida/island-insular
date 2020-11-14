@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.annotation.CheckResult
 import androidx.annotation.Size
-import com.google.firebase.analytics.FirebaseAnalytics
 import com.oasisfeng.island.IslandApplication
 import org.intellij.lang.annotations.Pattern
 
@@ -22,12 +21,12 @@ interface Analytics {
 	}
 
 	enum class Param(@param:Pattern("^[a-zA-Z][a-zA-Z0-9_]*$") val key: String) {
-		ITEM_ID(FirebaseAnalytics.Param.ITEM_ID),
+		ITEM_ID(""),
 		/** ITEM_CATEGORY and ITEM_NAME cannot be used together (limitation in Google Analytics implementation)  */
-		ITEM_NAME(FirebaseAnalytics.Param.ITEM_NAME),
-		ITEM_CATEGORY(FirebaseAnalytics.Param.ITEM_CATEGORY),
-		LOCATION(FirebaseAnalytics.Param.LOCATION),
-		CONTENT(FirebaseAnalytics.Param.CONTENT);
+		ITEM_NAME(""),
+		ITEM_CATEGORY(""),
+		LOCATION(""),
+		CONTENT("");
 	}
 
 	@CheckResult fun event(@Size(min = 1, max = 40) @Pattern("^[a-zA-Z][a-zA-Z0-9_]*$") event: String): Event
