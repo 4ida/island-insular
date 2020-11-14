@@ -1,4 +1,3 @@
-include ':setup-wizard-lib-platform-release'
 include 'shared', 'legacy', 'engine', 'mobile', 'fileprovider', 'installer', 'biometric', 'watcher', 'open'
 include 'assembly'
 include ':deagle'; project(':deagle').projectDir = new File(settingsDir, '../deagle/library')
