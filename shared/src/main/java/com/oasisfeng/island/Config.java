@@ -1,11 +1,7 @@
 package com.oasisfeng.island;
 
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfigValue;
-import com.oasisfeng.island.firebase.FirebaseWrapper;
-import com.oasisfeng.island.shared.BuildConfig;
-import com.oasisfeng.island.shared.R;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Remotely configurable values, (default values are defined in config_defaults.xml)
@@ -23,28 +19,25 @@ public enum Config {
 	PERMISSION_REQUEST_ALLOWED_APPS("permission_allowed_apps");
 
 	public String get() {
-		final FirebaseRemoteConfig config = FirebaseRemoteConfig.getInstance();
-		config.activateFetched();
-		return config.getString(key);
+		return config.get(key);
 	}
 
 	public static boolean isRemote() {
-		final FirebaseRemoteConfig config = FirebaseRemoteConfig.getInstance();
-		config.activateFetched();
-		final FirebaseRemoteConfigValue value = config.getValue(IS_REMOTE.key);
-		return value.getSource() == FirebaseRemoteConfig.VALUE_SOURCE_REMOTE;
+		return false;
 	}
 
 	Config(final String key) { this.key = key; }
 
 	private final String key;
 
-	static {
-		FirebaseWrapper.init();
-		final FirebaseRemoteConfigSettings settings = new FirebaseRemoteConfigSettings.Builder().setDeveloperModeEnabled(BuildConfig.DEBUG).build();
-		final FirebaseRemoteConfig config = FirebaseRemoteConfig.getInstance();
-		config.setConfigSettings(settings);
-		config.setDefaults(R.xml.config_defaults);
-		config.fetch();
-	}
+	private static Map<String, String> config = new HashMap<String, String>() {{
+		put("url_faq", "https://island.oasisfeng.com/faq");
+		put("url_setup", "https://island.oasisfeng.com/setup");
+		put("url_setup_god_mode", "https://island.oasisfeng.com/setup#manual-setup-for-island-in-god-mode");
+		put("url_setup_trouble", "https://island.oasisfeng.com/faq");
+		put("url_file_shuttle", "https://island.oasisfeng.com/files");
+		put("permission_allowed_apps", "com.oasisfeng.greenify,com.oasisfeng.nevo");
+	}};
+
+
 }
