@@ -1,8 +1,5 @@
 package com.oasisfeng.island;
 
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfigValue;
 import com.oasisfeng.island.firebase.FirebaseWrapper;
 import com.oasisfeng.island.shared.BuildConfig;
 import com.oasisfeng.island.shared.R;
@@ -24,28 +21,14 @@ public enum Config {
 	PERMISSION_REQUEST_ALLOWED_APPS("permission_allowed_apps");
 
 	public String get() {
-		final FirebaseRemoteConfig config = FirebaseRemoteConfig.getInstance();
-		config.activateFetched();
-		return config.getString(key);
+		return "";
 	}
 
 	public static boolean isRemote() {
-		final FirebaseRemoteConfig config = FirebaseRemoteConfig.getInstance();
-		config.activateFetched();
-		final FirebaseRemoteConfigValue value = config.getValue(IS_REMOTE.key);
-		return value.getSource() == FirebaseRemoteConfig.VALUE_SOURCE_REMOTE;
+		return false;
 	}
 
-	Config(final String key) { this.key = key; }
-
-	private final String key;
-
-	static {
-		FirebaseWrapper.init();
-		final FirebaseRemoteConfigSettings settings = new FirebaseRemoteConfigSettings.Builder().setDeveloperModeEnabled(BuildConfig.DEBUG).build();
-		final FirebaseRemoteConfig config = FirebaseRemoteConfig.getInstance();
-		config.setConfigSettings(settings);
-		config.setDefaults(R.xml.config_defaults);
-		config.fetch();
+	Config(final String key) {
 	}
+
 }

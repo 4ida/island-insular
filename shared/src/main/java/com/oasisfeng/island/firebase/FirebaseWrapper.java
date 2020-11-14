@@ -31,8 +31,6 @@ import androidx.annotation.NonNull;
  */
 @ParametersAreNonnullByDefault public class FirebaseWrapper {
 
-	public static Context init() { return sFirebaseContext; }
-
 	@SuppressLint("StaticFieldLeak") private static final Context sFirebaseContext;
 
 	static {
@@ -42,16 +40,13 @@ import androidx.annotation.NonNull;
 			// and suppress the annoying notification of GMS missing or upgrade required.
 			final CondomContext condom = CondomContext.wrap(context, "Firebase", new CondomOptions()
 					.setOutboundJudge((t, i, pkg) -> ! "com.google.android.gms".equals(pkg)).addKit(new NotificationKit()).addKit(new PowerManagerKit()));
-			FirebaseApp.initializeApp(condom);
 			context = condom;
-		} else FirebaseApp.initializeApp(context);
+		}
 		sFirebaseContext = context;
 	}
 
 	private static boolean isGooglePlayServicesReady(final Context context) {
-		if (context.getPackageManager().resolveContentProvider("com.google.android.gsf.gservices", 0) == null) return false;
-		final int gms_availability = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(context);
-		return gms_availability == ConnectionResult.SUCCESS;
+		return false;
 	}
 
 	private static class NotificationKit implements CondomKit {
