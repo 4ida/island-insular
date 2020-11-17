@@ -26,7 +26,7 @@ stages:
   stage: build
   before_script:
     - base64 -d $KEYSTORE_FILE > android-signing-keystore.jks
-    - "export VERSION_CODE=$CI_PIPELINE_IID && echo $VERSION_CODE"
+    - "export VERSION_CODE=$(expr 45200 + $CI_PIPELINE_IID) && echo $VERSION_CODE"
     - "export VERSION_SHA=`echo ${CI_COMMIT_SHA:0:8}` && echo $VERSION_SHA"
     # Prepare dependencies
     - bundle install -j $(nproc) --path vendor/ruby
