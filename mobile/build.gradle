@@ -7,7 +7,7 @@ android {
     defaultConfig {
         minSdkVersion this.minSdkVersion
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
-        missingDimensionStrategy 'compat', 'gingerbreadCompat'  // setup-wizard-lib has this dimension
+        missingDimensionStrategy 'compat', 'platformDeprecated'  // setup-wizard-lib has this dimension
     }
 
     buildFeatures {
