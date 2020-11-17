@@ -25,5 +25,5 @@ allprojects {
     }
 
     ext.compileSdkVersion = 30
-    ext.minSdkVersion = 24
+    ext.minSdkVersion = 27
 }
