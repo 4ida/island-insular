@@ -1,5 +1,6 @@
 include:
-  - "https://gitlab.com/accessable-net/gitlab-ci-templates/-/raw/master/scheduled_rebase.yml"
+  - project: accessable-net/gitlab-ci-templates
+    file: scheduled_rebase.yml
 
 .checkout-deagle: &checkout_deagle
   - git clone https://github.com/oasisfeng/deagle ../deagle -b dev
@@ -21,7 +22,7 @@ stages:
   - production
 
 .build_job:
-  image: circleci/android:api-29
+  image: circleci/android:api-30
   stage: build
   before_script:
     - base64 -d $KEYSTORE_FILE > android-signing-keystore.jks
@@ -50,7 +51,7 @@ buildRelease:
     name: production
 
 testDebug:
-  image: circleci/android:api-29
+  image: circleci/android:api-30
   stage: test
   dependencies:
     - buildDebug
@@ -63,7 +64,9 @@ testDebug:
     - bundle exec fastlane test
 
 publishInternal:
-  image: circleci/android:api-29
+  environment:
+    name: Google Play
+  image: circleci/android:api-30
   stage: internal
   dependencies:
     - buildRelease
@@ -79,6 +82,8 @@ publishInternal:
     - bundle exec fastlane internal
 
 .promote_job:
+  environment:
+    name: Google Play
   image: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
   when: manual
   dependencies: []
@@ -103,6 +108,8 @@ promoteBeta:
     - bundle exec fastlane promote_alpha_to_beta version_code:$VERSION_CODE
 
 promoteProduction:
+  environment:
+    name: Google Play
   extends: .promote_job
   stage: production
   # We only allow production promotion on `master` because
