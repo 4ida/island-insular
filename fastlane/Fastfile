@@ -22,13 +22,13 @@ platform :android do
   end
 
   desc "Build for debugging"
-  lane :buildDebug do
-    gradle(task: "bundle", flavor: "complete", build_type: "Debug")
+  lane :buildFdroidDebug do
+    gradle(task: "bundle", flavor: "completeFdroid", build_type: "Debug")
   end
 
   desc "Build for release"
-  lane :buildRelease do
-    gradle(task: "bundle", flavor: "complete", build_type: "Release")
+  lane :buildFdroidRelease do
+    gradle(task: "bundle", flavor: "completeFdroid", build_type: "Release")
   end
 
   desc "Submit a new Internal Build to Play Store"
