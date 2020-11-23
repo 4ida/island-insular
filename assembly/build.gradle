@@ -52,7 +52,7 @@ android {
         }
     }
 
-    flavorDimensions "packaging"
+    flavorDimensions "packaging", "version"
 
     productFlavors {
         complete {
@@ -66,6 +66,11 @@ android {
             applicationIdSuffix ".mobile"
             dimension "packaging"
             matchingFallbacks = ['full']
+        }
+        fdroid {
+            dimension "version"
+            applicationIdSuffix = ".fdroid"
+            versionNameSuffix = "-fdroid"
         }
     }
 
