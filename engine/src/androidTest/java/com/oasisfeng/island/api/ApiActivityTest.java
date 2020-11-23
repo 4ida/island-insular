@@ -60,7 +60,7 @@ public class ApiActivityTest {
 
 	private static void invokeApiActivityAndReceiver(final int expected_result, Intent intent) throws ExecutionException, InterruptedException {
 		final Context context = getContext();
-		intent = new Intent(intent).setPackage("com.oasisfeng.island");
+		intent = new Intent(intent).setPackage("com.oasisfeng.island.fdroid");
 
 		final CompletableFuture<Integer> result_code = new CompletableFuture<>();
 		final CompletableFuture<String> result_data = new CompletableFuture<>();
