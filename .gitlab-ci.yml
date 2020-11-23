@@ -29,7 +29,8 @@ stages:
     - "export VERSION_CODE=$(expr 45200 + $CI_PIPELINE_IID) && echo $VERSION_CODE"
     - "export VERSION_SHA=`echo ${CI_COMMIT_SHA:0:8}` && echo $VERSION_SHA"
     # Prepare dependencies
-    - bundle install -j $(nproc) --path vendor/ruby
+    - bundle config set path 'vendor/ruby'
+    - bundle install -j $(nproc)
     - *checkout_deagle
     - *checkout_setupwizard
   after_script:
@@ -42,26 +43,27 @@ stages:
       - .gradle
       - vendor/ruby
 
-buildDebug:
+buildFdroidDebug:
   extends: .build_job
   script:
-    - bundle exec fastlane buildDebug
+    - bundle exec fastlane buildFdroidDebug
 
-buildRelease:
+buildFdroidRelease:
   extends: .build_job
   script:
-    - bundle exec fastlane buildRelease
+    - bundle exec fastlane buildFdroidRelease
   environment:
     name: production
 
-testDebug:
+testFdroidDebug:
   image: circleci/android:api-30
   stage: test
   dependencies:
-    - buildDebug
+    - buildFdroidDebug
   before_script:
     # Prepare dependencies
-    - bundle install -j $(nproc) --path vendor/ruby
+    - bundle config set path 'vendor/ruby'
+    - bundle install -j $(nproc)
     - *checkout_deagle
     - *checkout_setupwizard
   script:
@@ -77,13 +79,14 @@ publishInternal:
   image: circleci/android:api-30
   stage: internal
   dependencies:
-    - buildRelease
+    - buildFdroidRelease
   when: manual
   before_script:
     - mv $google_play_service_account_api_key_json ~/.google-play.json
 
     # Install fastlane etc.
-    - bundle install -j $(nproc) --path vendor/ruby
+    - bundle config set path 'vendor/ruby'
+    - bundle install -j $(nproc)
   after_script:
     - rm ~/.google-play.json
   script:
@@ -103,7 +106,8 @@ publishInternal:
     - mv $google_play_service_account_api_key_json ~/.google-play.json
     - "export VERSION_CODE=$CI_PIPELINE_IID && echo $VERSION_CODE"
     # Install fastlane etc.
-    - bundle install -j $(nproc) --path vendor/ruby
+    - bundle config set path 'vendor/ruby'
+    - bundle install -j $(nproc)
   after_script:
     - rm ~/google-play.json
   cache:
