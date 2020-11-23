@@ -30,7 +30,7 @@ import static android.content.pm.PackageManager.MATCH_DEFAULT_ONLY;
 public class Modules {
 
 	// Engine is singleton across the device.
-	public static final String MODULE_ENGINE = "com.oasisfeng.island";
+	public static final String MODULE_ENGINE = "com.oasisfeng.island.fdroid";
 
 	public static void broadcast(final Context context, final Intent intent) {
 		if (intent.getComponent() != null || intent.getPackage() != null) throw new IllegalArgumentException("Explicit " + intent);
@@ -66,7 +66,7 @@ public class Modules {
 		final ComponentName launcher_activity = resolveActivity(context, intent);
 		if (launcher_activity != null) return launcher_activity;
 		if (BuildConfig.DEBUG) throw new IllegalStateException("UI module not installed");
-		return new ComponentName(MODULE_ENGINE, "com.oasisfeng.island.MainActivity");		// Hard-coded activity name as fallback.
+		return new ComponentName(MODULE_ENGINE, "com.oasisfeng.island.fdroid.MainActivity");		// Hard-coded activity name as fallback.
 	}
 
 	private static ComponentName resolveActivity(final Context context, final Intent intent) {

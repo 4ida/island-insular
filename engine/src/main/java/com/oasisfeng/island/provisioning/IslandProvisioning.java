@@ -93,7 +93,7 @@ public class IslandProvisioning extends IntentService {
 	private static final String PREF_KEY_PROFILE_PROVISION_TYPE = "profile.provision.type";
 	/** The revision for post-provisioning. Increase this const value if post-provisioning needs to be re-performed after upgrade. */
 	private static final int POST_PROVISION_REV = 9;
-	private static final String AFFILIATION_ID = "com.oasisfeng.island";
+	private static final String AFFILIATION_ID = "com.oasisfeng.island.fdroid";
 	private static final String SCHEME_PACKAGE = "package";
 
 	@OwnerUser @ProfileUser public static void start(final Context context, final @Nullable String action) {
