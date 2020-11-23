@@ -52,7 +52,7 @@ android {
         }
     }
 
-    flavorDimensions "packaging"
+    flavorDimensions "packaging", "version"
 
     productFlavors {
         complete {
@@ -71,6 +71,15 @@ android {
             applicationIdSuffix ".fileprovider"
             dimension "packaging"
             matchingFallbacks = ['full']
+        }
+
+        playstore {
+            dimension "version"
+        }
+        fdroid {
+            dimension "version"
+            applicationIdSuffix = ".fdroid"
+            versionNameSuffix = "-fdroid"
         }
     }
 
