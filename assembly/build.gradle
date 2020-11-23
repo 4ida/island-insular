@@ -20,7 +20,7 @@ android {
     defaultConfig {
         applicationId "com.oasisfeng.island"
         minSdkVersion this.minSdkVersion
-        targetSdkVersion 29     // Private APIs are accessed by module "open" and "fileprovider" (via indirectly loaded remote class)
+        targetSdkVersion 30     // Private APIs are accessed by module "open" and "fileprovider" (via indirectly loaded remote class)
         resConfigs "en", "zh"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         missingDimensionStrategy 'compat', 'platformDeprecated'  // setup-wizard has a "compat" dimension that Insular doesn't
@@ -52,7 +52,7 @@ android {
         }
     }
 
-    flavorDimensions "packaging"
+    flavorDimensions "packaging", "version"
 
     productFlavors {
         complete {
@@ -71,6 +71,15 @@ android {
             applicationIdSuffix ".fileprovider"
             dimension "packaging"
             matchingFallbacks = ['full']
+        }
+
+        playstore {
+            dimension "version"
+        }
+        fdroid {
+            dimension "version"
+            applicationIdSuffix = ".fdroid"
+            versionNameSuffix = "-fdroid"
         }
     }
 
