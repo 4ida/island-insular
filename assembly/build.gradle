@@ -74,6 +74,32 @@ android {
         }
     }
 
+    android.applicationVariants.all { variant ->
+        variant.mergeResources.doFirst {
+            variant.sourceSets.each { sourceSet ->
+                sourceSet.res.srcDirs = sourceSet.res.srcDirs.collect { dir ->
+                    def relDir = relativePath(dir)
+                    copy {
+                        from(dir)
+                        include '**/*.xml'
+                        filteringCharset = 'UTF-8'
+                        filter {
+                            line -> line
+                                    .replace('Island', 'Insular')
+                        }
+                        into("${buildDir}/tmp/${variant.dirName}/${relDir}")
+                    }
+                    copy {
+                        from(dir)
+                        exclude '**/*.xml'
+                        into("${buildDir}/tmp/${variant.dirName}/${relDir}")
+                    }
+                    return "${buildDir}/tmp/${variant.dirName}/${relDir}"
+                }
+            }
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
