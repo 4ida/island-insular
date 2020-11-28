@@ -21,14 +21,24 @@ platform :android do
     gradle(task: "test")
   end
 
-  desc "Build for debugging"
-  lane :buildFdroidDebug do
+  desc "Build bundle for debugging"
+  lane :buildFdroidDebugBundle do
     gradle(task: "bundle", flavor: "completeFdroid", build_type: "Debug")
   end
 
-  desc "Build for release"
-  lane :buildFdroidRelease do
+  desc "Build bundle for release"
+  lane :buildFdroidReleaseBundle do
     gradle(task: "bundle", flavor: "completeFdroid", build_type: "Release")
+  end
+
+  desc "Build apk for debugging"
+  lane :buildFdroidDebugApk do
+    gradle(task: "assemble", flavor: "completeFdroid", build_type: "Debug")
+  end
+
+  desc "Build apk for release"
+  lane :buildFdroidReleaseApk do
+    gradle(task: "assemble", flavor: "completeFdroid", build_type: "Release")
   end
 
   desc "Submit a new Internal Build to Play Store"

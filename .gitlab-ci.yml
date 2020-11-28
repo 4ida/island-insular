@@ -43,23 +43,32 @@ stages:
       - .gradle
       - vendor/ruby
 
-buildFdroidDebug:
+buildFdroidDebugApk:
   extends: .build_job
   script:
-    - bundle exec fastlane buildFdroidDebug
+    - bundle exec fastlane buildFdroidDebugApk
 
-buildFdroidRelease:
+# Generate Apk for direct use
+buildFdroidReleaseApk:
   extends: .build_job
   script:
-    - bundle exec fastlane buildFdroidRelease
+    - bundle exec fastlane buildFdroidReleaseApk
+  environment:
+    name: production
+
+buildFdroidReleaseBundle:
+  extends: .build_job
+  script:
+    - bundle exec fastlane buildFdroidReleaseBundle
   environment:
     name: production
 
 testFdroidDebug:
+  allow_failure: true
   image: circleci/android:api-30
   stage: test
   dependencies:
-    - buildFdroidDebug
+    - buildFdroidDebugApk
   before_script:
     # Prepare dependencies
     - bundle config set path 'vendor/ruby'
@@ -79,7 +88,7 @@ publishInternal:
   image: circleci/android:api-30
   stage: internal
   dependencies:
-    - buildFdroidRelease
+    - buildFdroidReleaseBundle
   when: manual
   before_script:
     - mv $google_play_service_account_api_key_json ~/.google-play.json
