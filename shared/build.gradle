@@ -22,7 +22,7 @@ android {
     }
 
     lintOptions {
-        check 'NewApi'
+        checkOnly 'NewApi'
         abortOnError true
         xmlReport false
         textReport true
