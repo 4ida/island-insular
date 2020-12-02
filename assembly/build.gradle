@@ -115,7 +115,7 @@ android {
     }
 
     lintOptions {
-        check 'NewApi'
+        checkOnly 'NewApi'
         abortOnError true
         htmlReport false
         xmlReport false
