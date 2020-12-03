@@ -28,7 +28,7 @@ android {
         missingDimensionStrategy 'compat', 'platformDeprecated'  // setup-wizard has a "compat" dimension that Insular doesn't
         versionCode Integer.valueOf(System.env.VERSION_CODE ?: 1)
         // Manually bump the semver version part of the string as necessary
-        versionName "4.5.2-${System.env.VERSION_SHA}"
+        versionName System.env.VERSION_NAME + System.env.VERSION_SHA ? "-${System.env.VERSION_SHA}" : ""
     }
 
     buildFeatures.dataBinding true
@@ -72,7 +72,6 @@ android {
         fdroid {
             dimension "version"
             applicationIdSuffix = ".fdroid"
-            versionNameSuffix = "-fdroid"
         }
     }
 
