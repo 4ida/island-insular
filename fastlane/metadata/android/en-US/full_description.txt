@@ -13,4 +13,3 @@ To uninstall and remove Insular completely, please first "Destroy Insular" in Se
 <li>DEVICE-ADMIN: Device administrator privilege is required to create the Insular space (work profile), which serves as the fundamental functionality of Insular. It will be explicitly requested for your consent.</li>
 <li>PACKAGE_USAGE_STATS: Required to correctly recognize the running state of apps. It will be explicitly requested for your consent.</li></ul>
 We will never collect data related to your privacy, please read our privacy policy for more details.
-Icons made by Freepik from www.flaticon.com.
