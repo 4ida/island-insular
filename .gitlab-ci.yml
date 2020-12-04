@@ -86,8 +86,8 @@ testFdroidDebug:
 
 publishInternal:
   environment:
-    name: Google Play
-  image: circleci/android:api-30
+    name: production
+  image: ruby:slim
   stage: internal
   dependencies:
     - buildFdroidReleaseBundle
@@ -109,8 +109,8 @@ publishInternal:
 
 .promote_job:
   environment:
-    name: Google Play
-  image: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+    name: production
+  image: ruby:slim
   when: manual
   dependencies: []
   before_script:
@@ -140,7 +140,7 @@ promoteBeta:
 
 promoteProduction:
   environment:
-    name: Google Play
+    name: production
   extends: .promote_job
   stage: production
   # We only allow production promotion on `master` because
