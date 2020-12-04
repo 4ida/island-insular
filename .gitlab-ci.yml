@@ -87,14 +87,14 @@ testFdroidDebug:
 publishInternal:
   environment:
     name: production
-  image: ruby:slim
+  image: ruby:alpine
   stage: internal
   dependencies:
     - buildFdroidReleaseBundle
   when: manual
   before_script:
     - mv $google_play_service_account_api_key_json ~/.google-play.json
-
+    - apk add build-base
     # Install fastlane etc.
     - bundle config set path 'vendor/bundle'
     - bundle install -j $(nproc)
@@ -110,11 +110,12 @@ publishInternal:
 .promote_job:
   environment:
     name: production
-  image: ruby:slim
+  image: ruby:alpine
   when: manual
   dependencies: []
   before_script:
     - mv $google_play_service_account_api_key_json ~/.google-play.json
+    - apk add build-base
     - "export VERSION_CODE=$CI_PIPELINE_IID && echo $VERSION_CODE"
     # Install fastlane etc.
     - bundle config set path 'vendor/bundle'
