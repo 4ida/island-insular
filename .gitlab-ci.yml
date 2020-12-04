@@ -10,6 +10,8 @@ include:
 
 variables:
   UPSTREAM_BRANCH: dev
+  LC_ALL: "en_US.UTF-8"
+  LANG: "en_US.UTF-8"
 
 stages:
   - environment
@@ -29,7 +31,7 @@ stages:
     - "export VERSION_CODE=$(expr 45200 + $CI_PIPELINE_IID) && echo $VERSION_CODE"
     - "export VERSION_SHA=`echo ${CI_COMMIT_SHA:0:8}` && echo $VERSION_SHA"
     # Prepare dependencies
-    - bundle config set path 'vendor/ruby'
+    - bundle config set path 'vendor/bundle'
     - bundle install -j $(nproc)
     - *checkout_deagle
     - *checkout_setupwizard
@@ -41,7 +43,7 @@ stages:
   cache:
     paths:
       - .gradle
-      - vendor/ruby
+      - vendor/bundle
 
 buildFdroidDebugApk:
   extends: .build_job
@@ -71,7 +73,7 @@ testFdroidDebug:
     - buildFdroidDebugApk
   before_script:
     # Prepare dependencies
-    - bundle config set path 'vendor/ruby'
+    - bundle config set path 'vendor/bundle'
     - bundle install -j $(nproc)
     - *checkout_deagle
     - *checkout_setupwizard
@@ -80,7 +82,7 @@ testFdroidDebug:
   cache:
     paths:
       - .gradle
-      - vendor/ruby
+      - vendor/bundle
 
 publishInternal:
   environment:
@@ -94,7 +96,7 @@ publishInternal:
     - mv $google_play_service_account_api_key_json ~/.google-play.json
 
     # Install fastlane etc.
-    - bundle config set path 'vendor/ruby'
+    - bundle config set path 'vendor/bundle'
     - bundle install -j $(nproc)
   after_script:
     - rm ~/.google-play.json
@@ -103,7 +105,7 @@ publishInternal:
   cache:
     paths:
       - .gradle
-      - vendor/ruby
+      - vendor/bundle
 
 .promote_job:
   environment:
@@ -115,14 +117,14 @@ publishInternal:
     - mv $google_play_service_account_api_key_json ~/.google-play.json
     - "export VERSION_CODE=$CI_PIPELINE_IID && echo $VERSION_CODE"
     # Install fastlane etc.
-    - bundle config set path 'vendor/ruby'
+    - bundle config set path 'vendor/bundle'
     - bundle install -j $(nproc)
   after_script:
     - rm ~/google-play.json
   cache:
     paths:
       - .gradle
-      - vendor/ruby
+      - vendor/bundle
 
 promoteAlpha:
   extends: .promote_job
