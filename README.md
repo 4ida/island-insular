@@ -9,11 +9,11 @@ This is a fork based on the excellent [Island](https://github.com/oasisfeng/isla
 Bascially no difference, except that
 
 - all blobs (gms, crashlytics, etc) are removed to comply with [F-droid's policy](https://f-droid.org/en/docs/Inclusion_Policy/)
-- Internet access of this app is removed because we just don't need it
+- Internet access for this app is removed because we just don't need it
 
 ## Features
 
-On the Insular, you can:
+With Insular, you can:
 - Isolate app, for privacy protection.
 - Clone app, for parallel running.
 - Freeze app, to completely block its background behaviors.
