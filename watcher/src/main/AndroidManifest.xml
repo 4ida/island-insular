@@ -22,7 +22,7 @@
             </intent-filter>
         </receiver>
         <provider android:name=".IslandAppWatcher$AppStateTracker"
-                  android:authorities="com.oasisfeng.island.watcher"
+                  android:authorities="${applicationId}.watcher"
                   android:exported="false"
                   android:enabled="@bool/since_api_26" />
 
