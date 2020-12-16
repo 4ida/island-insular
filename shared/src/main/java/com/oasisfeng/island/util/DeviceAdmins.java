@@ -48,7 +48,7 @@ public class DeviceAdmins {
 			return sDeviceAdminComponent;
 		}	// No resolve result on some Android 7.x devices, cause unknown.
 		if (BuildConfig.DEBUG) throw new IllegalStateException("Engine module is not correctly installed: " + admins);
-		return new ComponentName(Modules.MODULE_ENGINE, "com.oasisfeng.island.fdroid.IslandDeviceAdminReceiver");	// Fallback
+		return new ComponentName(Modules.MODULE_ENGINE, "com.oasisfeng.island.IslandDeviceAdminReceiver");	// Fallback
 	}
 
 	private static ComponentName sDeviceAdminComponent;
