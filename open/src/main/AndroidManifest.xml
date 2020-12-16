@@ -9,7 +9,7 @@
             </intent-filter>
         </service>
 
-        <provider android:name="com.oasisfeng.island.DelegatedScopeAuthorization$Initializer" android:authorities="com.oasisfeng.island.open.initializer" android:exported="false" />
+        <provider android:name="com.oasisfeng.island.DelegatedScopeAuthorization$Initializer" android:authorities="${applicationId}.open.initializer" android:exported="false" />
         <receiver android:name="com.oasisfeng.island.DelegatedScopeAuthorization" android:permission="android.permission.BIND_DEVICE_ADMIN">
             <intent-filter>
                 <action android:name="android.content.action.REQUEST_PERMISSION" />
@@ -18,4 +18,3 @@
 
     </application>
 </manifest>
-
