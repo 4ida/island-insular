@@ -17,7 +17,7 @@ import android.os.UserHandle;
 	 * Both as request type in {@link RestrictionsManager#requestPermission(String, String, PersistableBundle)}
 	 * and restriction key in {@link RestrictionsManager#getApplicationRestrictions()} (value: authorized delegations in string array)
 	 */
-	static final String TYPE_DELEGATION = "com.oasisfeng.island.fdroid.delegation";	// Name-spaced as requirement mentioned by RestrictionsManager.requestPermission()
+	static final String TYPE_DELEGATION = "com.oasisfeng.island.delegation";	// Name-spaced as requirement mentioned by RestrictionsManager.requestPermission()
 
 	/**
 	 * Optional user serial number to request cross-user authorization. (Without this key, default to current user only)
