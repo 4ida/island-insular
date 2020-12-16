@@ -37,9 +37,9 @@ public class Api {
 
 	interface v2 extends v1 {
 		/* Runtime permissions required for certain APIs */
-		String PERMISSION_FREEZE_PACKAGE = "com.oasisfeng.island.fdroid.permission.FREEZE_PACKAGE";
-		String PERMISSION_LAUNCH_PACKAGE = "com.oasisfeng.island.fdroid.permission.LAUNCH_PACKAGE";
-		String PERMISSION_SUSPEND_PACKAGE = "com.oasisfeng.island.fdroid.permission.SUSPEND_PACKAGE";
+		String PERMISSION_FREEZE_PACKAGE = "com.oasisfeng.island.permission.FREEZE_PACKAGE";
+		String PERMISSION_LAUNCH_PACKAGE = "com.oasisfeng.island.permission.LAUNCH_PACKAGE";
+		String PERMISSION_SUSPEND_PACKAGE = "com.oasisfeng.island.permission.SUSPEND_PACKAGE";
 
 		/**
 		 * Freeze the app(s) specified by Intent data with "package" or "packages" (comma-separated) scheme.
