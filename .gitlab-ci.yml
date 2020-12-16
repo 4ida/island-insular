@@ -1,6 +1,8 @@
 include:
   - project: accessable-net/gitlab-ci-templates
     file: scheduled_rebase.yml
+  - project: accessable-net/gitlab-ci-templates
+    file: move-latest-tag-to-this-commit.yml
 
 .checkout-deagle: &checkout_deagle
   - git clone https://github.com/oasisfeng/deagle ../deagle -b dev
