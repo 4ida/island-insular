@@ -80,6 +80,7 @@ android {
             variant.sourceSets.each { sourceSet ->
                 sourceSet.res.srcDirs = sourceSet.res.srcDirs.collect { dir ->
                     def relDir = relativePath(dir)
+                    delete '**/analytics_tracker.xml'
                     copy {
                         from(dir)
                         include '**/*.xml'
