@@ -77,7 +77,7 @@
             </intent-filter>
         </service>
 
-        <provider android:authorities="com.oasisfeng.island.settings"
+        <provider android:authorities="${applicationId}.settings"
                   android:name="com.oasisfeng.settings.AppSettingsProvider"
                   android:exported="false" />
 
