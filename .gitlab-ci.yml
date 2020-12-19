@@ -2,18 +2,20 @@ include:
   - project: accessable-net/gitlab-ci-templates
     file: scheduled_rebase.yml
   - project: accessable-net/gitlab-ci-templates
-    file: move-latest-tag-to-this-commit.yml
+    file: android-set-version-ci.yml
 
 .checkout-deagle: &checkout_deagle
   - git clone https://github.com/oasisfeng/deagle ../deagle -b dev
 
 .checkout-setupwizard: &checkout_setupwizard
-  - git clone https://android.googlesource.com/platform/frameworks/opt/setupwizard ../setup-wizard
+  - git clone
+    https://android.googlesource.com/platform/frameworks/opt/setupwizard
+    ../setup-wizard
 
 variables:
   UPSTREAM_BRANCH: dev
-  LC_ALL: "en_US.UTF-8"
-  LANG: "en_US.UTF-8"
+  VERSION_BUILD_GRADLE_LOCATION: assembly/build.gradle
+  VERSION_ANDROID_MANIFEST_LOCATION: assembly/src/main/AndroidManifest.xml
 
 stages:
   - environment
@@ -30,8 +32,6 @@ stages:
   stage: build
   before_script:
     - base64 -d $KEYSTORE_FILE > android-signing-keystore.jks
-    - "export VERSION_CODE=$(expr 45200 + $CI_PIPELINE_IID) && echo $VERSION_CODE"
-    - "export VERSION_SHA=`echo ${CI_COMMIT_SHA:0:8}` && echo $VERSION_SHA"
     # Prepare dependencies
     - bundle config set path 'vendor/bundle'
     - bundle install -j $(nproc)
@@ -118,7 +118,7 @@ publishInternal:
   before_script:
     - mv $google_play_service_account_api_key_json ~/.google-play.json
     - apk add build-base
-    - "export VERSION_CODE=$CI_PIPELINE_IID && echo $VERSION_CODE"
+    - 'export VERSION_CODE=$CI_PIPELINE_IID && echo $VERSION_CODE'
     # Install fastlane etc.
     - bundle config set path 'vendor/bundle'
     - bundle install -j $(nproc)
