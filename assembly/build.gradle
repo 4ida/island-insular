@@ -24,9 +24,9 @@ android {
         resConfigs "en", "zh"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         missingDimensionStrategy 'compat', 'platformDeprecated'  // setup-wizard has a "compat" dimension that Insular doesn't
-        versionCode 51465
+        versionCode 51468
         // Manually bump the semver version part of the string as necessary
-        versionName '5.1.2-42172be8'
+        versionName '5.1.2-ed3d0f77'
     }
 
     buildFeatures.dataBinding true
