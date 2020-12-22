@@ -4,6 +4,10 @@ Isolate your big brother app.
 
 This is a fork based on the excellent [Island](https://github.com/oasisfeng/island). Extra credit to [Shelter](https://github.com/PeterCxy/Shelter) which inspire me to make the completely FLOSS fork of Island.
 
+## Documentation
+
+On how to enable Insular via `adb`, cross-profile file access, God mode, etc, see [documentation](https://secure-system.gitlab.io/Insular/).
+
 ## Differences from Island
 
 Bascially no difference, except that
@@ -27,7 +31,7 @@ To uninstall and remove Insular completely, please first "Destroy Insular" in Se
 
 ## PERMISSIONS
 
-We only request permissions to achieve what you want. So only the followings:
+We only request permissions to achieve what you want. So only the followings sensitive permissions:
 
 - **DEVICE-ADMIN**: Device administrator privilege is required to create the Insular space (work profile), which serves as the fundamental functionality of Insular. It will be explicitly requested for your consent.
 - **PACKAGE_USAGE_STATS**: Required to correctly recognize the running state of apps. It will be explicitly requested for your consent.

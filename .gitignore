@@ -162,3 +162,10 @@ lint/outputs/
 lint/tmp/
 # lint/reports/
 
+test
+public
+
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
