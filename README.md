@@ -4,6 +4,13 @@ Isolate your big brother app.
 
 This is a fork based on the excellent [Island](https://github.com/oasisfeng/island). Extra credit to [Shelter](https://github.com/PeterCxy/Shelter) which inspire me to make the completely FLOSS fork of Island.
 
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.svg"
+    alt="Get it on F-Droid"
+    height="80">](https://f-droid.org/packages/com.oasisfeng.island.fdroid)
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on-zh-cn.svg"
+    alt="下载应用，请到 F-Droid"
+    height="80">](https://f-droid.org/packages/com.oasisfeng.island.fdroid)
+
 ## Documentation
 
 On how to enable Insular via `adb`, cross-profile file access, God mode, etc, see [documentation](https://secure-system.gitlab.io/Insular/).
