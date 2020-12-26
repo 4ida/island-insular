@@ -78,7 +78,7 @@ o Ambiente de Sandbox. O Island nunca colete dados relacionados à sua privacida
     <string name="action_deactivate">Desativar</string>
     <string name="action_rescind">Desistir</string>
 
-    <string name="menu_tip">Dica…</string> <string 
+    <string name="menu_tip">Dica…</string>
     <string name="menu_search">Buscar</string>
     <string name="menu_filter">Filtrar</string>
     <string name="menu_settings">Configurações</string>
