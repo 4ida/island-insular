@@ -12,6 +12,11 @@ include:
     https://android.googlesource.com/platform/frameworks/opt/setupwizard
     ../setup-wizard
 
+.only-release: &only-release
+  only:
+    - master
+    - tags
+
 variables:
   UPSTREAM_BRANCH: dev
   VERSION_BUILD_GRADLE_LOCATION: assembly/build.gradle
@@ -54,6 +59,7 @@ buildFdroidDebugApk:
 
 # Generate Apk for direct use
 buildFdroidReleaseApk:
+  <<: *only-release
   extends: .build_job
   script:
     - bundle exec fastlane buildFdroidReleaseApk
@@ -61,6 +67,7 @@ buildFdroidReleaseApk:
     name: production
 
 buildFdroidReleaseBundle:
+  <<: *only-release
   extends: .build_job
   script:
     - bundle exec fastlane buildFdroidReleaseBundle
@@ -87,6 +94,7 @@ testFdroidDebug:
       - vendor/bundle
 
 publishInternal:
+  <<: *only-release
   environment:
     name: production
   image: ruby:alpine
@@ -110,6 +118,7 @@ publishInternal:
       - vendor/bundle
 
 .promote_job:
+  <<: *only-release
   environment:
     name: production
   image: ruby:alpine
