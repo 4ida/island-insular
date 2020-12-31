@@ -2,23 +2,23 @@
 <defaultsMap>
     <entry>
         <key>url_faq</key>
-        <value>https://island.oasisfeng.com/faq</value>
+        <value>https://secure-system.gitlab.io/Insular/faq</value>
     </entry>
     <entry>
         <key>url_setup</key>
-        <value>https://island.oasisfeng.com/setup</value>
+        <value>https://secure-system.gitlab.io/Insular/setup</value>
     </entry>
     <entry>
         <key>url_setup_god_mode</key>
-        <value>https://island.oasisfeng.com/setup#manual-setup-for-island-in-god-mode</value>
+        <value>https://secure-system.gitlab.io/Insular/setup#manual-setup-for-island-in-god-mode</value>
     </entry>
     <entry>
         <key>url_setup_trouble</key>
-        <value>https://island.oasisfeng.com/faq</value>
+        <value>https://secure-system.gitlab.io/Insular/faq</value>
     </entry>
     <entry>
         <key>url_file_shuttle</key>
-        <value>https://island.oasisfeng.com/files</value>
+        <value>https://secure-system.gitlab.io/Insular/files</value>
     </entry>
     <entry>
         <key>permission_allowed_apps</key>
