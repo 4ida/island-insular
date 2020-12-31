@@ -31,11 +31,11 @@ public enum Config {
 	private final String key;
 
 	private static Map<String, String> config = new HashMap<String, String>() {{
-		put("url_faq", "https://island.oasisfeng.com/faq");
-		put("url_setup", "https://island.oasisfeng.com/setup");
-		put("url_setup_god_mode", "https://island.oasisfeng.com/setup#manual-setup-for-island-in-god-mode");
-		put("url_setup_trouble", "https://island.oasisfeng.com/faq");
-		put("url_file_shuttle", "https://island.oasisfeng.com/files");
+		put("url_faq", "https://secure-system.gitlab.io/Insular/faq");
+		put("url_setup", "https://secure-system.gitlab.io/Insular/setup");
+		put("url_setup_god_mode", "https://secure-system.gitlab.io/Insular/setup#manual-setup-for-island-in-god-mode");
+		put("url_setup_trouble", "https://secure-system.gitlab.io/Insular/faq");
+		put("url_file_shuttle", "https://secure-system.gitlab.io/Insular/files");
 		put("permission_allowed_apps", "com.oasisfeng.greenify,com.oasisfeng.nevo");
 	}};
 
