@@ -3,7 +3,7 @@
     <Preference android:key="@string/key_version" android:title="@string/pref_about_version_title" tools:summary="1.0 beta 1" />
 
     <Preference android:title="@string/pref_about_open_source_title" android:summary="@string/pref_about_open_source_summary">
-        <intent android:action="android.intent.action.VIEW" android:data="https://github.com/oasisfeng/island" />
+        <intent android:action="android.intent.action.VIEW" android:data="https://gitlab.com/secure-system/Insular" />
     </Preference>
 
     <Preference android:key="@string/key_beta" android:title="@string/pref_about_beta" android:summary="@string/pref_about_beta_github_summary">
