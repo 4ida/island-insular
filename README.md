@@ -13,14 +13,7 @@ This is a fork based on the excellent [Island](https://github.com/oasisfeng/isla
 
 ## Documentation
 
-On how to enable Insular via `adb`, cross-profile file access, God mode, etc, see [documentation](https://secure-system.gitlab.io/Insular/).
-
-## Differences from Island
-
-Bascially no difference, except that
-
-- all blobs (gms, crashlytics, etc) are removed to comply with [F-droid's policy](https://f-droid.org/en/docs/Inclusion_Policy/)
-- Internet access for this app is removed because we just don't need it
+On how to enable Insular via `adb`, cross-profile file access, God mode (extending app control to apps outside the Work Profile), differences from [Island](https://github.com/oasisfeng/island), etc, see [the documentation](https://secure-system.gitlab.io/Insular/).
 
 ## Features
 
@@ -38,7 +31,7 @@ To uninstall and remove Insular completely, please first "Destroy Insular" in Se
 
 ## PERMISSIONS
 
-We only request permissions to achieve what you want. So only the followings sensitive permissions:
+We only request permissions to achieve what you want. The followings sensitive permissions are requested with reasons:
 
 - **DEVICE-ADMIN**: Device administrator privilege is required to create the Insular space (work profile), which serves as the fundamental functionality of Insular. It will be explicitly requested for your consent.
 - **PACKAGE_USAGE_STATS**: Required to correctly recognize the running state of apps. It will be explicitly requested for your consent.
