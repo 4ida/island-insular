@@ -1,5 +1,5 @@
 Insular is a FLOSS fork of Island.
-On the Insular, you can:<ul>
+With Insular, you can:<ul>
 <li>Isolate app, for privacy protection.</li>
 <li>Clone app, for parallel running.</li>
 <li>Freeze app, to completely block its background behaviors.</li>
