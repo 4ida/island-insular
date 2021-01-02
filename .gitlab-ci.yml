@@ -22,7 +22,8 @@ variables:
   VERSION_BUILD_GRADLE_LOCATION: assembly/build.gradle
   VERSION_ANDROID_MANIFEST_LOCATION: assembly/src/main/AndroidManifest.xml
   VERSION_CHANGELOG_DIR_LOCATION: fastlane/metadata/android/en-US/changelogs
-
+  CI_COMMIT_BRANCH: dev-ci
+  CI_PIPELINE_SOURCE: push
 stages:
   - environment
   - build
@@ -37,6 +38,9 @@ stages:
   image: circleci/android:api-30
   stage: build
   before_script:
+    # Fix artifacts permissions
+    - sudo chown `whoami`:`groups` $VERSION_BUILD_GRADLE_LOCATION
+    - cat $VERSION_BUILD_GRADLE_LOCATION
     - base64 -d $KEYSTORE_FILE > android-signing-keystore.jks
     # Prepare dependencies
     - bundle config set path 'vendor/bundle'
@@ -163,6 +167,6 @@ promoteProduction:
   # We only allow production promotion on `master` because
   # it has its own production scoped secret variables
   only:
-    - master
+    - $CI_DEFAULT_BRANCH
   script:
     - bundle exec fastlane promote_beta_to_production version_code:$VERSION_CODE
