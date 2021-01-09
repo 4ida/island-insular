@@ -18,13 +18,14 @@ On how to enable Insular via `adb`, cross-profile file access, God mode (extendi
 ## Features
 
 With Insular, you can:
-- Isolate app, for privacy protection.
-- Clone app, for parallel running.
-- Freeze app, to completely block its background behaviors.
-- Hide app, for various reasons.
-- Archive app, for potential future use on-demand.
-- Use VPN only on one side, or different VPN on both sides.
-- Prohibit USB access.
+- Isolate your Big Brother apps
+- Clone and run multiple accounts simutaniuosly
+- Freeze or archive apps and prevent any background behaviors
+- Unfreeze apps on-demand with home screen shortcuts
+- Re-freeze marked apps with one tap
+- Hide apps
+- Selectively enable (or disable) VPN for different group of apps
+- Prohibit USB access to mitigate attacks with physical access
 
 If your device is incompatible or not encrypted, you can skip this limitation manually. Please refer to [the XDA post](https://forum.xda-developers.com/android/-t3366295) for details.
 To uninstall and remove Insular completely, please first "Destroy Insular" in Settings - Setup - Click the recycle-bin icon besides Insular. If you have already uninstalled Insular app, please "Remove work profile" in your device "Settings - Accounts".
