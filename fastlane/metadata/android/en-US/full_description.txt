@@ -1,12 +1,13 @@
 Insular is a FLOSS fork of Island.
 With Insular, you can:<ul>
-<li>Isolate app, for privacy protection.</li>
-<li>Clone app, for parallel running.</li>
-<li>Freeze app, to completely block its background behaviors.</li>
-<li>Hide app, for various reasons.</li>
-<li>Archive app, for potential future use on-demand.</li>
-<li>Use VPN only on one side, or different VPN on both sides.</li>
-<li>Prohibit USB access</li></ul>
+<li>Isolate your Big Brother apps</li>
+<li>Clone and run multiple accounts simutaniuosly</li>
+<li>Freeze or archive apps and prevent any background behaviors</li>
+<li>Unfreeze apps on-demand with home screen shortcuts</li>
+<li>Re-freeze marked apps with one tap</li>
+<li>Hide apps</li>
+<li>Selectively enable (or disable) VPN for different group of apps</li>
+<li>Prohibit USB access to mitigate attacks with physical access</li></ul>
 If your device is incompatible or not encrypted, you can skip this limitation manually. Please refer to <a href="https://forum.xda-developers.com/android/-t3366295">the XDA post</a> for details.
 To uninstall and remove Insular completely, please first "Destroy Insular" in Settings - Setup - Click the recycle-bin icon besides Insular. If you have already uninstalled Insular app, please "Remove work profile" in your device "Settings - Accounts".
 
@@ -18,3 +19,4 @@ We will never collect any data and Insular have no Internet permission. Please r
 <b>Differences from Island</b><ul>
 <li>all blobs (gms, crashlytics, etc) are removed to comply with F-droid's policy</li>
 <li>Internet access of this app is removed because we just don't need it</li>
+All features are preserved and will be synced upon Island's updates
