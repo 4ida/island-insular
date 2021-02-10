@@ -87,15 +87,15 @@ platform :android do
 
   desc "Generate changelogs and tag after incrementing the version"
   lane :post_release_build do
-    require "date"
-    write_changelog_from_commits(
-      additional_section_name: DateTime.now.strftime("%d/%m/%Y %H:%M"),
-      version_code: android_get_version_code(
-        gradle_file: ENV["VERSION_BUILD_GRADLE_LOCATION"],
-      ),
-      changelog_dir: ENV["VERSION_CHANGELOG_DIR_LOCATION"]
-    )
-    git_add(path: ENV["VERSION_CHANGELOG_DIR_LOCATION"])
+    # require "date"
+    # write_changelog_from_commits(
+    #   additional_section_name: DateTime.now.strftime("%d/%m/%Y %H:%M"),
+    #   version_code: android_get_version_code(
+    #     gradle_file: ENV["VERSION_BUILD_GRADLE_LOCATION"],
+    #   ),
+    #   changelog_dir: ENV["VERSION_CHANGELOG_DIR_LOCATION"]
+    # )
+    # git_add(path: ENV["VERSION_CHANGELOG_DIR_LOCATION"])
     git_commit(
       path: [ENV["VERSION_CHANGELOG_DIR_LOCATION"], ENV["VERSION_BUILD_GRADLE_LOCATION"]], 
       message: "Version Bump",
