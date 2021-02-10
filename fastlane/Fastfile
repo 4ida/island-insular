@@ -95,6 +95,7 @@ platform :android do
       ),
       changelog_dir: ENV["VERSION_CHANGELOG_DIR_LOCATION"]
     )
+    git_add(path: ENV["VERSION_CHANGELOG_DIR_LOCATION"])
     git_commit(
       path: [ENV["VERSION_CHANGELOG_DIR_LOCATION"], ENV["VERSION_BUILD_GRADLE_LOCATION"]], 
       message: "Version Bump",
