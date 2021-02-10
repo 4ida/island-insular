@@ -53,6 +53,7 @@ android {
     }
 
     lintOptions {
+        checkReleaseBuilds false
         check 'NewApi'
         abortOnError true
         htmlReport false
@@ -73,7 +74,9 @@ dependencies {
     completeImplementation project(':fileprovider')
     completeImplementation project(':installer')
     completeImplementation project(':watcher')
+    completeImplementation project(':media')
     completeImplementation project(':open')
+    completeImplementation project(':ninja')
     // Engine only
     engineImplementation project(':engine')
     // Mobile only
