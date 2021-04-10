@@ -101,23 +101,6 @@ public class FeaturedListViewModel extends BaseAndroidViewModel {
 			addFeature(app, "managed_mainland", R.string.featured_managed_mainland_title, R.string.featured_managed_mainland_description, 0,
 					R.string.featured_button_setup, c -> SettingsActivity.startWithPreference(activity, IslandSettingsFragment.class));
 
-		addFeaturedApp(R.string.featured_greenify_title, R.string.featured_greenify_description, R.drawable.ic_launcher_greenify, "com.oasisfeng.greenify");
-
-		if (! addFeaturedApp(R.string.featured_icebox_title, R.string.featured_icebox_description, R.drawable.ic_launcher_icebox, PACKAGE_ICEBOX)
-				&& Users.hasProfile() && IslandAppListProvider.getInstance(activity).get(PACKAGE_ICEBOX, Users.profile) == null) {
-			new Handler().postDelayed(() -> {	// Dirty workaround due to IslandAppListProvider updated after onResume()
-				if (activity.getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.RESUMED)
-						&& IslandAppListProvider.getInstance(activity).get(PACKAGE_ICEBOX, Users.profile) != null)
-					update(activity);
-			}, 1_000);
-			final IslandAppInfo icebox_in_mainland = IslandAppListProvider.getInstance(activity).get(PACKAGE_ICEBOX, Users.getParentProfile());
-			if (icebox_in_mainland != null) addFeature(app, "icebox", R.string.featured_icebox_title, R.string.featured_icebox_description,
-					R.drawable.ic_launcher_icebox, R.string.action_clone,
-					c -> new IslandAppClones(activity, this, icebox_in_mainland).request());
-		}
-
-		addFeaturedApp(R.string.featured_appops_title, R.string.featured_appops_description, R.drawable.ic_launcher_appops,
-				"rikka.appops", "rikka.appops.pro");
 
 		features.endBatchedUpdates();
 	}
