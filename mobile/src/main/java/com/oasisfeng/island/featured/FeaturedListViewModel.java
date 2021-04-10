@@ -95,9 +95,6 @@ public class FeaturedListViewModel extends AndroidViewModel {
 				final String tag = "file_shuttle";
 				addFeatureRaw(app, tag, R.string.featured_file_shuttle_title, R.string.featured_file_shuttle_description,
 						0, R.string.action_activate, vm -> { if (IslandFiles.enableFileShuttle(activity)) removeFeature(tag); });
-			} else {
-				Analytics.$().setProperty(Analytics.Property.FileShuttleEnabled, "1");
-				addFeaturedApp(R.string.featured_fx_title, R.string.featured_fx_description, R.drawable.ic_launcher_fx, "nextapp.fx");
 			}
 		}
 
@@ -114,12 +111,8 @@ public class FeaturedListViewModel extends AndroidViewModel {
 			addFeature(app, "managed_mainland", R.string.featured_managed_mainland_title, R.string.featured_managed_mainland_description, 0,
 					R.string.featured_button_setup, c -> SettingsActivity.startWithPreference(activity, IslandSettingsFragment.class));
 
-		addFeaturedApp(R.string.featured_greenify_title, R.string.featured_greenify_description, R.drawable.ic_launcher_greenify, "com.oasisfeng.greenify");
 		addFeaturedApp(R.string.featured_saf_enhancer_title, R.string.featured_saf_enhancer_description, R.drawable.ic_launcher_saf_enhancer,
 				"app.gwo.safenhancer.lite", "app.gwo.safenhancer");
-
-		addFeaturedApp(R.string.featured_appops_title, R.string.featured_appops_description, R.drawable.ic_launcher_appops,
-				"rikka.appops", "rikka.appops.pro");
 
 		features.endBatchedUpdates();
 	}
