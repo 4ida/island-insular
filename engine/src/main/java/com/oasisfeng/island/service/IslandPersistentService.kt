@@ -13,9 +13,9 @@ import android.os.IBinder
 import android.os.Looper
 import android.os.MessageQueue
 import android.os.Process
+import android.util.Log
 import androidx.annotation.RequiresApi
 import com.oasisfeng.island.PersistentService
-import com.oasisfeng.island.util.UserPrefixedLog as Log
 
 /**
  * Persistent helper service.
