@@ -11,6 +11,9 @@ include:
   - git clone
     https://android.googlesource.com/platform/frameworks/opt/setupwizard
     ../setup-wizard
+  - pushd ../setup-wizard
+  - sed -i -e "s/Compile/Implementation/g" library/rules.gradle
+  - popd
 
 .only-release: &only-release
   only:
@@ -133,7 +136,7 @@ publishInternal:
   before_script:
     - mv $google_play_service_account_api_key_json ~/.google-play.json
     - apk add build-base
-    - 'export VERSION_CODE=$CI_PIPELINE_IID && echo $VERSION_CODE'
+    - "export VERSION_CODE=$CI_PIPELINE_IID && echo $VERSION_CODE"
     # Install fastlane etc.
     - bundle config set path 'vendor/bundle'
     - bundle install -j $(nproc)
