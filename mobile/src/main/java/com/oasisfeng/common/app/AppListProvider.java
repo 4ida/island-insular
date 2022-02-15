@@ -98,7 +98,7 @@ public abstract class AppListProvider<T extends AppInfo> extends ContentProvider
 
 	/** Currently this only detects static library package (e.g. "com.google.android.trichromelibrary") */
 	private boolean isInvalidPackage(final PackageManager pm, final ApplicationInfo app) {
-		final Integer privateFlags = Apps.getPrivateFlags(app);
+		final Integer privateFlags = null;
 		if ((privateFlags == null || privateFlags == 0) && app.sourceDir == null && app.targetSdkVersion == 0
 				&& app.labelRes == 0 && app.nonLocalizedLabel == null && app.name == null
 				&& AppInfo.isHidden(app) == Boolean.FALSE && app.enabled)
