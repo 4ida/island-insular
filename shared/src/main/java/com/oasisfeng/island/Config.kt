@@ -1,8 +1,5 @@
 package com.oasisfeng.island
 
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig
-import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
-import com.google.firebase.remoteconfig.internal.ConfigFetchHandler
 import com.oasisfeng.island.firebase.FirebaseWrapper
 import com.oasisfeng.island.shared.BuildConfig
 
@@ -14,27 +11,28 @@ import com.oasisfeng.island.shared.BuildConfig
 enum class Config(private val key: String, private val default: String) {
 	IS_REMOTE("is_remote", ""),
 	URL_PLAY_ALPHA("url_play_alpha", "https://groups.google.com/g/islandroid"),
-	URL_FAQ("url_faq", "https://island.oasisfeng.com/faq"),
-	URL_SETUP("url_setup", "https://island.oasisfeng.com/setup"),
-	URL_SETUP_MANAGED_MAINLAND("url_setup_god_mode", "https://island.oasisfeng.com/setup#activate-managed-mainland"),
-	URL_SETUP_TROUBLESHOOTING("url_setup_trouble", "https://island.oasisfeng.com/faq"),
+	URL_FAQ("url_faq", "https://secure-system.gitlab.io/Insular/faq"),
+	URL_SETUP("url_setup", "https://secure-system.gitlab.io/Insular/setup"),
+	URL_SETUP_MANAGED_MAINLAND("url_setup_god_mode", "https://secure-system.gitlab.io/Insular/setup#activate-managed-mainland"),
+	URL_SETUP_TROUBLESHOOTING("url_setup_trouble", "hhttps://secure-system.gitlab.io/Insular/faq"),
 	PERMISSION_REQUEST_ALLOWED_APPS("permission_allowed_apps", "com.oasisfeng.greenify,com.oasisfeng.nevo");
-
-	fun get(): String = FirebaseRemoteConfig.getInstance().getString(key).ifEmpty { default }
+	fun get(): String = config.getOrDefault(key, "")
 
 	companion object {
 
 		@JvmStatic fun isRemote(): Boolean {
-			val value = FirebaseRemoteConfig.getInstance().getValue(IS_REMOTE.key)
-			return value.source == FirebaseRemoteConfig.VALUE_SOURCE_REMOTE
+			return false
 		}
 
-		init {
-			FirebaseWrapper.init()
-			val settings = FirebaseRemoteConfigSettings.Builder().setMinimumFetchIntervalInSeconds(
-				if (BuildConfig.DEBUG) 30 else ConfigFetchHandler.DEFAULT_MINIMUM_FETCH_INTERVAL_IN_SECONDS)
-			FirebaseRemoteConfig.getInstance().apply {
-				setConfigSettingsAsync(settings.build()).addOnCompleteListener { fetchAndActivate() }}
-		}
+		val config: Map<String, String> =
+				hashMapOf<String, String>(
+						"url_faq" to "https://secure-system.gitlab.io/Insular/faq",
+						"url_setup" to "https://secure-system.gitlab.io/Insular/setup",
+						"url_setup_god_mode" to
+								"https://secure-system.gitlab.io/Insular/setup#manual-setup-for-island-in-god-mode",
+						"url_setup_trouble" to "https://secure-system.gitlab.io/Insular/faq",
+						"url_file_shuttle" to "https://secure-system.gitlab.io/Insular/files",
+						"permission_allowed_apps" to "com.oasisfeng.greenify,com.oasisfeng.nevo"
+				)
 	}
 }
